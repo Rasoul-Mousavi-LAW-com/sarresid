@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="سررسید - مرجع تخصصی حقوق اقتصادی، داوری و تجارت بین‌الملل">
+    <meta name="keywords" content="حقوق اقتصادی, داوری, تجارت بین‌الملل, تحولات اقتصادی">
+    <title>سررسید | مرجع تخصصی حقوق اقتصادی و تجارت بین‌الملل</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #1a2f4f;
+            --secondary-color: #c9a962;
+            --accent-color: #2c4a7c;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --border-color: #e0e0e0;
+            --white: #ffffff;
+            --shadow: 0 2px 15px rgba(0,0,0,0.08);
+            --shadow-hover: 0 5px 25px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 13px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar-date {
+            display: flex;
+            gap: 20px;
+        }
+
+        .top-bar-date span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .top-bar-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .top-bar-social a {
+            color: var(--white);
+            transition: color 0.3s;
+        }
+
+        .top-bar-social a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Header */
+        .main-header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            height: 70px;
+            width: auto;
+        }
+
+        .logo-text h1 {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--primary-color);
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            font-size: 12px;
+            color: var(--text-light);
+            display: block;
+            margin-top: 2px;
+        }
+
+        .header-search {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            padding: 10px 40px 10px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            width: 280px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            width: 320px;
+        }
+
+        .search-box button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--secondary-color);
+            border: none;
+            color: var(--white);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-box button:hover {
+            background: var(--primary-color);
+        }
+
+        /* Navigation */
+        .main-nav {
+            background: var(--primary-color);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 0;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            display: block;
+            color: var(--white);
+            text-decoration: none;
+            padding: 15px 22px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu li.active a {
+            background: rgba(255,255,255,0.1);
+            border-bottom-color: var(--secondary-color);
+        }
+
+        .nav-menu .dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--white);
+            min-width: 240px;
+            box-shadow: var(--shadow-hover);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            border-radius: 0 0 8px 8px;
+            overflow: hidden;
+        }
+
+        .nav-menu li:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .nav-menu .dropdown a {
+            color: var(--text-dark);
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-menu .dropdown a:hover {
+            background: var(--bg-light);
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Breaking News */
+        .breaking-news {
+            background: var(--white);
+            padding: 12px 0;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .breaking-news-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .breaking-label {
+            background: #dc3545;
+            color: var(--white);
+            padding: 6px 15px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 13px;
+            white-space: nowrap;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .news-ticker {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ticker-wrapper {
+            display: flex;
+            animation: ticker 30s linear infinite;
+        }
+
+        .ticker-item {
+            white-space: nowrap;
+            padding-left: 50px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .ticker-item a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .ticker-item a:hover {
+            color: var(--secondary-color);
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Main Layout */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            margin-bottom: 40px;
+        }
+
+        .main-news {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 500px;
+        }
+
+        .main-news img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .main-news:hover img {
+            transform: scale(1.05);
+        }
+
+        .main-news-overlay {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 40px;
+            color: var(--white);
+        }
+
+        .news-category {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .main-news h2 {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        .news-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .news-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Secondary News Grid */
+        .secondary-news {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .news-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .news-card-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .news-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .news-card:hover .news-card-image img {
+            transform: scale(1.1);
+        }
+
+        .news-card-content {
+            padding: 20px;
+        }
+
+        .news-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .news-card-excerpt {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Section Title */
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 40px 0 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--border-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            right: 0;
+            width: 150px;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+
+        .section-title h2 {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title h2 i {
+            color: var(--secondary-color);
+        }
+
+        .view-all {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.3s;
+        }
+
+        .view-all:hover {
+            gap: 10px;
+        }
+
+        /* News List */
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .news-list-item {
+            display: flex;
+            gap: 20px;
+            background: var(--white);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .news-list-item:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .news-list-image {
+            width: 180px;
+            height: 120px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .news-list-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .news-list-content {
+            flex: 1;
+        }
+
+        .news-list-content h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .news-list-content p {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .sidebar-widget {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+
+        .widget-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .widget-title i {
+            color: var(--secondary-color);
+        }
+
+        /* Categories */
+        .category-list {
+            list-style: none;
+        }
+
+        .category-list li {
+            margin-bottom: 12px;
+        }
+
+        .category-list a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-dark);
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 6px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .category-list a:hover {
+            background: var(--bg-light);
+            color: var(--primary-color);
+            padding-right: 20px;
+        }
+
+        .category-count {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+
+        /* Most Read */
+        .most-read-list {
+            counter-reset: read-counter;
+        }
+
+        .most-read-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .most-read-item:last-child {
+            border-bottom: none;
+        }
+
+        .most-read-item::before {
+            counter-increment: read-counter;
+            content: counter(read-counter);
+            width: 30px;
+            height: 30px;
+            background: var(--bg-light);
+            color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .most-read-item:nth-child(1)::before {
+            background: var(--secondary-color);
+            color: var(--white);
+        }
+
+        .most-read-item:nth-child(2)::before {
+            background: #6c757d;
+            color: var(--white);
+        }
+
+        .most-read-item:nth-child(3)::before {
+            background: #6f4e37;
+            color: var(--white);
+        }
+
+        .most-read-content h4 {
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.6;
+            margin-bottom: 5px;
+        }
+
+        .most-read-content span {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        /* Tags */
+        .tags-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .tag:hover {
+            background: var(--primary-color);
+            color: var(--white);
+            border-color: var(--secondary-color);
+        }
+
+        /* Newsletter */
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .newsletter-form input {
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+
+        .btn {
+            background: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            padding: 14px 25px;
+            border-radius: 6px;
+            font-family: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        /* Footer */
+        .main-footer {
+            background: var(--primary-color);
+            color: var(--white);
+            margin-top: 60px;
+            padding: 60px 0 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .footer-section p {
+            font-size: 14px;
+            line-height: 2;
+            opacity: 0.9;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.9;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary-color);
+            padding-right: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 25px 0;
+            text-align: center;
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar-date {
+                display: none;
+            }
+
+            .logo-text h1 {
+                font-size: 22px;
+            }
+
+            .search-box input {
+                width: 200px;
+            }
+
+            .search-box input:focus {
+                width: 220px;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                left: 0;
+                background: var(--primary-color);
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu .dropdown {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background: rgba(0,0,0,0.2);
+                display: none;
+            }
+
+            .nav-menu li:hover .dropdown {
+                display: block;
+            }
+
+            .main-news {
+                height: 350px;
+            }
+
+            .main-news h2 {
+                font-size: 20px;
+            }
+
+            .secondary-news {
+                grid-template-columns: 1fr;
+            }
+
+            .news-list-item {
+                flex-direction: column;
+            }
+
+            .news-list-image {
+                width: 100%;
+                height: 200px;
+            }
+
+            .sidebar {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .breaking-news-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* Loading Animation */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-bar-date">
+                    <span><i class="far fa-calendar-alt"></i> چهارشنبه، ۷ خرداد ۱۴۰۵</span>
+                    <span><i class="far fa-clock"></i> ۱۴:۳۲</span>
+                </div>
+                <div class="top-bar-social">
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 150'%3E%3Ctext x='10' y='90' font-family='Arial' font-size='60' font-weight='bold' fill='%231a2f4f'%3Eسررسید%3C/text%3E%3Cpath d='M 320 80 Q 350 60 370 30' stroke='%23c9a962' stroke-width='8' fill='none'/%3E%3Cpolygon points='370,30 365,40 380,35' fill='%23c9a962'/%3E%3C/svg%3E" alt="سررسید">
+                    <div class="logo-text">
+                        <h1>سررسید</h1>
+                        <span>مرجع تخصصی حقوق اقتصادی و تجارت بین‌الملل</span>
+                    </div>
+                </div>
+                <div class="header-search">
+                    <div class="search-box">
+                        <input type="text" placeholder="جستجو در اخبار و مقالات...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    <button class="mobile-menu-toggle" onclick="toggleMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu" id="navMenu">
+                    <li class="active"><a href="#"><i class="fas fa-home"></i> صفحه اصلی</a></li>
+                    <li>
+                        <a href="#">حقوق اقتصادی <i class="fas fa-chevron-down" style="margin-right: 5px; font-size: 10px;"></i></a>
+                        <ul class="dropdown">
+                            <li><a href="#">حقوق تجارت</a></li>
+                            <li><a href="#">حقوق شرکت‌ها</a></li>
+                            <li><a href="#">حقوق بورس و اوراق بهادار</a></li>
+                            <li><a href="#">حقوق بانکی</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">داوری <i class="fas fa-chevron-down" style="margin-right: 5px; font-size: 10px;"></i></a>
+                        <ul class="dropdown">
+                            <li><a href="#">داوری تجاری بین‌المللی</a></li>
+                            <li><a href="#">داوری سرمایه‌گذاری</a></li>
+                            <li><a href="#">آراء داوری</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">تجارت بین‌الملل</a></li>
+                    <li><a href="#">تحولات اقتصادی</a></li>
+                    <li><a href="#">مقالات تخصصی</a></li>
+                    <li><a href="#">رویدادها</a></li>
+                    <li><a href="#">تماس با ما</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Breaking News -->
+    <div class="container">
+        <div class="breaking-news">
+            <div class="breaking-news-content">
+                <span class="breaking-label"><i class="fas fa-bolt"></i> فوری</span>
+                <div class="news-ticker">
+                    <div class="ticker-wrapper" id="ticker">
+                        <div class="ticker-item"><a href="#">دیوان داوری ICC رأی جدیدی در پرونده سرمایه‌گذاری نفتی صادر کرد</a></div>
+                        <div class="ticker-item"><a href="#">قانون جدید مبارزه با پولشویی در مجلس تصویب شد</a></div>
+                        <div class="ticker-item"><a href="#">نشست تخصصی بررسی تحولات حقوق تجارت بین‌الملل برگزار می‌شود</a></div>
+                        <div class="ticker-item"><a href="#">اتحادیه اروپا تعرفه‌های جدیدی بر کالاهای وارداتی اعمال کرد</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-layout">
+            <main>
+                <!-- Hero Section -->
+                <section class="hero-section reveal">
+                    <div class="main-news">
+                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=600&fit=crop" alt="Main News">
+                        <div class="main-news-overlay">
+                            <span class="news-category">داوری بین‌المللی</span>
+                            <h2>تحلیل جامع رأی دیوان داوری اتاق بازرگانی بین‌المللی در پرونده قرارداد نفتی ایران و شرکت‌های خارجی</h2>
+                            <div class="news-meta">
+                                <span><i class="far fa-user"></i> دکتر محمد رضایی</span>
+                                <span><i class="far fa-clock"></i> ۲ ساعت پیش</span>
+                                <span><i class="far fa-eye"></i> ۱,۲۴۵ بازدید</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="secondary-news">
+                        <article class="news-card reveal">
+                            <div class="news-card-image">
+                                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop" alt="News">
+                            </div>
+                            <div class="news-card-content">
+                                <span class="news-category">حقوق اقتصادی</span>
+                                <h3>بررسی چالش‌های حقوقی قراردادهای بیع بین‌المللی در پرتو کنوانسیون وین</h3>
+                                <div class="news-meta" style="margin-top: 10px;">
+                                    <span><i class="far fa-clock"></i> ۴ ساعت پیش</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="news-card reveal">
+                            <div class="news-card-image">
+                                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&h=400&fit=crop" alt="News">
+                            </div>
+                            <div class="news-card-content">
+                                <span class="news-category">تجارت بین‌الملل</span>
+                                <h3>تأثیر تحریم‌ها بر قراردادهای تجاری: راهکارهای حقوقی و داوری</h3>
+                                <div class="news-meta" style="margin-top: 10px;">
+                                    <span><i class="far fa-clock"></i> ۶ ساعت پیش</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Latest News Section -->
+                <section class="latest-section">
+                    <div class="section-title reveal">
+                        <h2><i class="far fa-newspaper"></i> آخرین اخبار و تحلیل‌ها</h2>
+                        <a href="#" class="view-all">مشاهده همه <i class="fas fa-arrow-left"></i></a>
+                    </div>
+
+                    <div class="news-list">
+                        <article class="news-list-item reveal">
+                            <div class="news-list-image">
+                                <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=400&h=300&fit=crop" alt="News">
+                            </div>
+                            <div class="news-list-content">
+                                <span class="news-category">حقوق شرکت‌ها</span>
+                                <h3>تحلیل جدیدترین آراء دادگاه‌ها در خصوص مسئولیت مدیران شرکت‌های سهامی</h3>
+                                <p>بررسی تحلیلی آراء اخیر دادگاه‌های تجدیدنظر در خصوص حدود و ثغور مسئولیت مدنی و کیفری مدیران عامل و اعضای هیئت مدیره...</p>
+                                <div class="news-meta" style="margin-top: 10px;">
+                                    <span><i class="far fa-clock"></i> ۳ ساعت پیش</span>
+                                    <span><i class="far fa-comment"></i> ۱۲ نظر</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="news-list-item reveal">
+                            <div class="news-list-image">
+                                <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=400&h=300&fit=crop" alt="News">
+                            </div>
+                            <div class="news-list-content">
+                                <span class="news-category">تحولات اقتصادی</span>
+                                <h3>بررسی تأثیر نرخ ارز بر قراردادهای بلندمدت تجاری و راهکارهای تعدیل</h3>
+                                <p>تحلیل جامع مکانیسم‌های حقوقی تعدیل قراردادها در شرایط نوسانات ارزی و رویه داوری‌های بین‌المللی...</p>
+                                <div class="news-meta" style="margin-top: 10px;">
+                                    <span><i class="far fa-clock"></i> ۵ ساعت پیش</span>
+                                    <span><i class="far fa-comment"></i> ۸ نظر</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="news-list-item reveal">
+                            <div class="news-list-image">
+                                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop" alt="News">
+                            </div>
+                            <div class="news-list-content">
+                                <span class="news-category">داوری</span>
+                                <h3>کنوانسیون نیویورک ۱۹۵۸: چالش‌های اجرایی آراء داوری خارجی در ایران</h3>
+                                <p>بررسی موانع و چالش‌های اجرایی شدن آراء داوری خارجی در سیستم قضایی ایران با توجه به تعهدات بین‌المللی...</p>
+                                <div class="news-meta" style="margin-top: 10px;">
+                                    <span><i class="far fa-clock"></i> ۸ ساعت پیش</span>
+                                    <span><i class="far fa-comment"></i> ۱۵ نظر</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="news-list-item reveal">
+                            <div class="news-list-image">
+                                <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=400&h=300&fit=crop" alt="News">
+                            </div>
+                            <div class="news-list-content">
+                                <span class="news-category">حقوق بانکی</span>
+                                <h3>اعتبارات اسنادی LC در تجارت بین‌الملل:_UCP 600 و رویه‌های جدید</h3>
+                                <p>تحلیل تغییرات جدید در مقررات یو سی پی ۶۰۰ و تأثیر آن بر عملیات اعتبارات اسنادی در بانک‌های ایرانی...</p>
+                                <div class="news-meta" style="margin-top: 10px;">
+                                    <span><i class="far fa-clock"></i> ۱۰ ساعت پیش</span>
+                                    <span><i class="far fa-comment"></i> ۶ نظر</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Articles Section -->
+                <section class="articles-section">
+                    <div class="section-title reveal">
+                        <h2><i class="fas fa-book-reader"></i> مقالات تخصصی</h2>
+                        <a href="#" class="view-all">مشاهده همه <i class="fas fa-arrow-left"></i></a>
+                    </div>
+
+                    <div class="secondary-news">
+                        <article class="news-card reveal">
+                            <div class="news-card-image">
+                                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&h=400&fit=crop" alt="Article">
+                            </div>
+                            <div class="news-card-content">
+                                <h3>داوری سرمایه‌گذاری در پرتو موافقت‌نامه‌های دوجانبه سرمایه‌گذاری (BITs)</h3>
+                                <p class="news-card-excerpt">بررسی سازوکارهای حل‌وفصل اختلافات سرمایه‌گذاری بین دولتها و سرمایه‌گذاران خارجی...</p>
+                            </div>
+                        </article>
+
+                        <article class="news-card reveal">
+                            <div class="news-card-image">
+                                <img src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=600&h=400&fit=crop" alt="Article">
+                            </div>
+                            <div class="news-card-content">
+                                <h3>حقوق رقابت در اتحادیه اروپا و تأثیر آن بر شرکت‌های ایرانی</h3>
+                                <p class="news-card-excerpt">تحلیل مقررات ضد انحصار اروپا و الزامات compliance برای شرکت‌های فعال در بازار اروپا...</p>
+                            </div>
+                        </article>
+
+                        <article class="news-card reveal">
+                            <div class="news-card-image">
+                                <img src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=600&h=400&fit=crop" alt="Article">
+                            </div>
+                            <div class="news-card-content">
+                                <h3>قراردادهای EPC در پروژه‌های نفت و گاز: نکات کلیدی حقوقی</h3>
+                                <p class="news-card-excerpt">بررسی شرایط عمومی و خصوصی قراردادهای مهندسی، تأمین و ساخت در صنعت نفت...</p>
+                            </div>
+                        </article>
+
+                        <article class="news-card reveal">
+                            <div class="news-card-image">
+                                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&h=400&fit=crop" alt="Article">
+                            </div>
+                            <div class="news-card-content">
+                                <h3>رمزارزها و چالش‌های حقوقی: از منظر حقوق ایران و اسناد بین‌المللی</h3>
+                                <p class="news-card-excerpt">تحلیل وضعیت حقوقی ارزهای دیجیتال و قراردادهای هوشمند در نظام‌های حقوقی مختلف...</p>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <!-- Categories Widget -->
+                <div class="sidebar-widget reveal">
+                    <h3 class="widget-title"><i class="fas fa-folder-open"></i> دسته‌بندی‌ها</h3>
+                    <ul class="category-list">
+                        <li><a href="#">حقوق اقتصادی <span class="category-count">۴۵</span></a></li>
+                        <li><a href="#">داوری بین‌المللی <span class="category-count">۳۲</span></a></li>
+                        <li><a href="#">تجارت بین‌الملل <span class="category-count">۲۸</span></a></li>
+                        <li><a href="#">حقوق شرکت‌ها <span class="category-count">۲۴</span></a></li>
+                        <li><a href="#">حقوق بانکی <span class="category-count">۱۹</span></a></li>
+                        <li><a href="#">تحولات اقتصادی <span class="category-count">۳۷</span></a></li>
+                        <li><a href="#">مقالات تخصصی <span class="category-count">۵۶</span></a></li>
+                    </ul>
+                </div>
+
+                <!-- Most Read Widget -->
+                <div class="sidebar-widget reveal">
+                    <h3 class="widget-title"><i class="fas fa-fire"></i> پربازدیدترین‌ها</h3>
+                    <div class="most-read-list">
+                        <div class="most-read-item">
+                            <div class="most-read-content">
+                                <h4><a href="#" style="color: inherit; text-decoration: none;">شرایط فورس ماژور در قراردادهای بین‌المللی</a></h4>
+                                <span>۵,۴۳۲ بازدید</span>
+                            </div>
+                        </div>
+                        <div class="most-read-item">
+                            <div class="most-read-content">
+                                <h4><a href="#" style="color: inherit; text-decoration: none;">راهنمای کامل داوری تجاری بین‌المللی</a></h4>
+                                <span>۴,۸۲۱ بازدید</span>
+                            </div>
+                        </div>
+                        <div class="most-read-item">
+                            <div class="most-read-content">
+                                <h4><a href="#" style="color: inherit; text-decoration: none;">تحلیل قانون جدید مبارزه با پولشویی</a></h4>
+                                <span>۴,۱۵۶ بازدید</span>
+                            </div>
+                        </div>
+                        <div class="most-read-item">
+                            <div class="most-read-content">
+                                <h4><a href="#" style="color: inherit; text-decoration: none;">اعتبارات اسنادی و UC P600</a></h4>
+                                <span>۳,۸۹۲ بازدید</span>
+                            </div>
+                        </div>
+                        <div class="most-read-item">
+                            <div class="most-read-content">
+                                <h4><a href="#" style="color: inherit; text-decoration: none;">مسئولیت مدیران شرکت‌های سهامی</a></h4>
+                                <span>۳,۶۵۴ بازدید</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tags Widget -->
+                <div class="sidebar-widget reveal">
+                    <h3 class="widget-title"><i class="fas fa-tags"></i> برچسب‌ها</h3>
+                    <div class="tags-cloud">
+                        <a href="#" class="tag">داوری</a>
+                        <a href="#" class="tag">حقوق تجارت</a>
+                        <a href="#" class="tag">قراردادهای بین‌المللی</a>
+                        <a href="#" class="tag">تحریم</a>
+                        <a href="#" class="tag">ICC</a>
+                        <a href="#" class="tag">LC</a>
+                        <a href="#" class="tag">BIT</a>
+                        <a href="#" class="tag">کنوانسیون وین</a>
+                        <a href="#" class="tag">حقوق شرکت‌ها</a>
+                        <a href="#" class="tag">پولشویی</a>
+                        <a href="#" class="tag">رمزارز</a>
+                        <a href="#" class="tag">EPC</a>
+                    </div>
+                </div>
+
+                <!-- Newsletter Widget -->
+                <div class="sidebar-widget reveal" style="background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); color: white;">
+                    <h3 class="widget-title" style="color: white; border-color: var(--secondary-color);">
+                        <i class="fas fa-envelope"></i> خبرنامه
+                    </h3>
+                    <p style="margin-bottom: 20px; font-size: 14px; line-height: 2;">برای دریافت آخرین اخبار و تحلیل‌های حقوق اقتصادی ایمیل خود را وارد کنید</p>
+                    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('عضویت با موفقیت انجام شد!');">
+                        <input type="text" placeholder="نام و نام خانوادگی" required>
+                        <input type="email" placeholder="آدرس ایمیل" required>
+                        <button type="submit" class="btn btn-block" style="background: var(--secondary-color);">عضویت در خبرنامه</button>
+                    </form>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>درباره سررسید</h3>
+                    <p>سررسید مرجع تخصصی اخبار، تحلیل‌ها و مقالات حقوق اقتصادی، داوری و تجارت بین‌الملل است. ما با بهره‌گیری از متخصصان برجسته، اطلاعات دقیق و به‌روز را در اختیار شما قرار می‌دهیم.</p>
+                    <div style="margin-top: 20px; display: flex; gap: 15px;">
+                        <a href="#" style="width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fab fa-telegram"></i></a>
+                        <a href="#" style="width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>دسترسی سریع</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> صفحه اصلی</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> درباره ما</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> تماس با ما</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> تبلیغات</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> همکاری با ما</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>موضوعات</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> حقوق اقتصادی</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> داوری بین‌المللی</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> تجارت بین‌الملل</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> حقوق شرکت‌ها</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> مقالات تخصصی</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>اطلاعات تماس</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> تهران، خیابان ولیعصر، برج میلاد</a></li>
+                        <li><a href="tel:02112345678"><i class="fas fa-phone"></i> ۰۲۱-۱۲۳۴۵۶۷۸</a></li>
+                        <li><a href="mailto:info@sarresid.ir"><i class="fas fa-envelope"></i> info@sarresid.ir</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> شنبه تا چهارشنبه: ۹ تا ۱۷</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>تمامی حقوق محفوظ است | سررسید ۱۴۰۵ | طراحی و توسعه با <i class="fas fa-heart" style="color: var(--secondary-color);"></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <div class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Back to Top Button
+        window.onscroll = function() {
+            const backToTop = document.getElementById('backToTop');
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Trigger once on load
+
+        // Search Box Focus Effect
+        const searchInput = document.querySelector('.search-box input');
+        searchInput.addEventListener('focus', function() {
+            this.parentElement.style.transform = 'scale(1.02)';
+        });
+        searchInput.addEventListener('blur', function() {
+            this.parentElement.style.transform = 'scale(1)';
+        });
+
+        // News Ticker Pause on Hover
+        const ticker = document.querySelector('.ticker-wrapper');
+        const tickerItems = document.querySelector('.news-ticker');
+        
+        tickerItems.addEventListener('mouseenter', function() {
+            ticker.style.animationPlayState = 'paused';
+        });
+        
+        tickerItems.addEventListener('mouseleave', function() {
+            ticker.style.animationPlayState = 'running';
+        });
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active Navigation Item
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.forEach(l => l.parentElement.classList.remove('active'));
+                this.parentElement.classList.add('active');
+            });
+        });
+
+        // Newsletter Form Validation
+        const newsletterForm = document.querySelector('.newsletter-form');
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const inputs = this.querySelectorAll('input');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.style.borderColor = '#dc3545';
+                } else {
+                    input.style.borderColor = '#28a745';
+                }
+            });
+            
+            if (isValid) {
+                alert('با تشکر! شما با موفقیت در خبرنامه عضو شدید.');
+                this.reset();
+            }
+        });
+
+        // Dynamic Time Update
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('fa-IR', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            const dateElement = document.querySelector('.top-bar-date span:first-child');
+            if (dateElement) {
+                // Keep the date, just update if needed
+            }
+            const timeElement = document.querySelector('.top-bar-date span:last-child');
+            if (timeElement) {
+                timeElement.innerHTML = `<i class="far fa-clock"></i> ${timeString}`;
+            }
+        }
+        setInterval(updateTime, 1000);
+
+        // Loading Simulation for Images
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.addEventListener('load', function() {
+                    this.style.opacity = '1';
+                });
+                img.style.opacity = '0';
+                img.style.transition = 'opacity 0.3s';
+            });
+        });
+
+        // Category Click Handler
+        document.querySelectorAll('.category-list a').forEach(category => {
+            category.addEventListener('click', function(e) {
+                e.preventDefault();
+                const categoryName = this.textContent.trim();
+                alert(`نمایش اخبار دسته: ${categoryName}`);
+                // Here you would normally redirect to category page
+            });
+        });
+
+        // Tag Click Handler
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function(e) {
+                e.preventDefault();
+                const tagName = this.textContent.trim();
+                alert(`نمایش محتوای برچسب: ${tagName}`);
+                // Here you would normally redirect to tag page
+            });
+        });
+
+        // Add to Favorites (Bookmark) Functionality
+        document.querySelectorAll('.news-card, .news-list-item').forEach(item => {
+            item.addEventListener('dblclick', function() {
+                this.style.border = '2px solid var(--secondary-color)';
+                setTimeout(() => {
+                    this.style.border = 'none';
+                }, 1000);
+                // Show notification
+                showNotification('به علاقه‌مندی‌ها اضافه شد');
+            });
+        });
+
+        // Notification System
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--primary-color);
+                color: white;
+                padding: 15px 30px;
+                border-radius: 8px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+                z-index: 10000;
+                font-weight: 600;
+                animation: slideDown 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideUp 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Add animations to stylesheet
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from { transform: translate(-50%, -20px); opacity: 0; }
+                to { transform: translate(-50%, 0); opacity: 1; }
+            }
+            @keyframes slideUp {
+                from { transform: translate(-50%, 0); opacity: 1; }
+                to { transform: translate(-50%, -20px); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Reading Progress Bar
+        function readingProgress() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            
+            let progressBar = document.getElementById('readingProgress');
+            if (!progressBar) {
+                progressBar = document.createElement('div');
+                progressBar.id = 'readingProgress';
+                progressBar.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    right: 0;
+                    width: 0%;
+                    height: 3px;
+                    background: var(--secondary-color);
+                    z-index: 9999;
+                    transition: width 0.1s;
+                `;
+                document.body.appendChild(progressBar);
+            }
+            progressBar.style.width = scrolled + "%";
+        }
+        window.onscroll = function() {
+            readingProgress();
+        };
+
+        // Lazy Loading for Images
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src || img.src;
+                        img.classList.remove('lazy');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img').forEach(img => imageObserver.observe(img));
+        }
+
+        // Console Welcome Message
+        console.log('%c سررسید ', 'background: #1a2f4f; color: #c9a962; font-size: 24px; font-weight: bold; padding: 10px 20px;');
+        console.log('%c مرجع تخصصی حقوق اقتصادی و تجارت بین‌الملل ', 'color: #1a2f4f; font-size: 14px;');
+    </script>
+</body>
+</html>
