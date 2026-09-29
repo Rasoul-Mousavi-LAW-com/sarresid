@@ -43,6 +43,63 @@
             overflow-x: hidden;
         }
 
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: #ffffff;
+            z-index: 100000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        #preloader.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #preloader img {
+            max-width: 280px;
+            width: 60%;
+            height: auto;
+            animation: preloaderLogo 2s ease-in-out both;
+        }
+
+        .preloader-bar {
+            width: 180px;
+            height: 3px;
+            background: var(--border-color);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .preloader-bar span {
+            display: block;
+            height: 100%;
+            width: 0;
+            background: var(--secondary-color);
+            animation: preloaderBar 2s ease-in-out forwards;
+        }
+
+        @keyframes preloaderLogo {
+            0% { opacity: 0; transform: scale(0.9); }
+            40% { opacity: 1; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.03); }
+        }
+
+        @keyframes preloaderBar {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        body.is-loading {
+            overflow: hidden;
+        }
+
         /* Top Bar */
         .top-bar {
             background: var(--primary-color);
@@ -928,6 +985,32 @@
             }
         }
 
+
+        .news-card-image img, .news-list-image img, .main-news img {
+            background: linear-gradient(135deg, #091a31, #1a3558);
+        }
+        .news-card-image::after, .news-list-image::after, .main-news::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            box-shadow: inset 0 0 0 1px rgba(201,169,98,.14);
+        }
+
+        .articles-section .secondary-news {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @media (max-width: 1024px) {
+            .articles-section .secondary-news {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .articles-section .secondary-news {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Loading Animation */
         .skeleton {
             background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
@@ -953,15 +1036,21 @@
         }
     </style>
 </head>
-<body>
+<body class="is-loading">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <img src="https://raw.githubusercontent.com/Tejarat-Azad-com/upload/refs/heads/main/Pmr0Llk5NVjAF7REhSzpVsc7Ydw-UNy8ZwN5Rl6FfRISYWfpCg.png" alt="سررسید">
+        <div class="preloader-bar"><span></span></div>
+    </div>
 
     <!-- Top Bar -->
     <div class="top-bar">
         <div class="container">
             <div class="top-bar-content">
                 <div class="top-bar-date">
-                    <span><i class="far fa-calendar-alt"></i> چهارشنبه، ۷ خرداد ۱۴۰۵</span>
-                    <span><i class="far fa-clock"></i> ۱۴:۳۲</span>
+                    <span><i class="far fa-calendar-alt"></i> سه‌شنبه، ۷ مهر ۱۴۰۵</span>
+                    <span><i class="far fa-clock"></i> ۲۳:۲۴</span>
                 </div>
                 <div class="top-bar-social">
                     <a href="#"><i class="fab fa-telegram"></i></a>
@@ -978,9 +1067,8 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 150'%3E%3Ctext x='10' y='90' font-family='Arial' font-size='60' font-weight='bold' fill='%231a2f4f'%3Eسررسید%3C/text%3E%3Cpath d='M 320 80 Q 350 60 370 30' stroke='%23c9a962' stroke-width='8' fill='none'/%3E%3Cpolygon points='370,30 365,40 380,35' fill='%23c9a962'/%3E%3C/svg%3E" alt="سررسید">
+                    <img src="https://raw.githubusercontent.com/Tejarat-Azad-com/upload/refs/heads/main/Pmr0Llk5NVjAF7REhSzpVsc7Ydw-UNy8ZwN5Rl6FfRISYWfpCg.png" alt="سررسید">
                     <div class="logo-text">
-                        <h1>سررسید</h1>
                         <span>مرجع تخصصی حقوق اقتصادی و تجارت بین‌الملل</span>
                     </div>
                 </div>
@@ -1052,7 +1140,7 @@
                 <!-- Hero Section -->
                 <section class="hero-section reveal">
                     <div class="main-news">
-                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=600&fit=crop" alt="Main News">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDkwMCIgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIj4KPGRlZnM+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJiZzEiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwNzE4MmYiLz48c3RvcCBvZmZzZXQ9IjAuNTgiIHN0b3AtY29sb3I9IiMxMDJhNGUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwNTBlMWQiLz48L2xpbmVhckdyYWRpZW50PgogIDxyYWRpYWxHcmFkaWVudCBpZD0iZ2xvdzEiIGN4PSI3MCUiIGN5PSIzNSUiIHI9IjY1JSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMmM0YTdjIiBzdG9wLW9wYWNpdHk9Ii41NSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJjNGE3YyIgc3RvcC1vcGFjaXR5PSIwIi8+PC9yYWRpYWxHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQxIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZjBkMjhhIi8+PHN0b3Agb2Zmc2V0PSIwLjQ1IiBzdG9wLWNvbG9yPSIjYzlhOTYyIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOGU2ZTJmIi8+PC9saW5lYXJHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdsYXNzMSIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzgzYzdmZiIgc3RvcC1vcGFjaXR5PSIuNSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJjNGE3YyIgc3RvcC1vcGFjaXR5PSIuMSIvPjwvbGluZWFyR3JhZGllbnQ+CiAgPGZpbHRlciBpZD0ic2hhZG93MSIgeD0iLTQwJSIgeT0iLTQwJSIgd2lkdGg9IjE4MCUiIGhlaWdodD0iMTgwJSI+PGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjIwIiBzdGREZXZpYXRpb249IjE4IiBmbG9vZC1jb2xvcj0iIzAwMCIgZmxvb2Qtb3BhY2l0eT0iLjQ1Ii8+PC9maWx0ZXI+CiAgPGZpbHRlciBpZD0iYmx1cjEiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjIyIi8+PC9maWx0ZXI+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2JnMSkiLz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2dsb3cxKSIvPgo8ZyBvcGFjaXR5PSIuMTgiIHN0cm9rZT0iIzc4YTlkNiIgc3Ryb2tlLXdpZHRoPSIxIj48cGF0aCBkPSJNMCA3MjBIMTYwME0wIDc2MEgxNjAwTTAgODAwSDE2MDAiLz48cGF0aCBkPSJNMjIwIDBWOTAwTTM0MCAwVjkwME0xNDYwIDBWOTAwIi8+PC9nPgo8Y2lyY2xlIGN4PSIxMjgwIiBjeT0iMTgwIiByPSIxNzAiIGZpbGw9IiNjOWE5NjIiIG9wYWNpdHk9Ii4wNiIgZmlsdGVyPSJ1cmwoI2JsdXIxKSIvPgo8ZyBmaWx0ZXI9InVybCgjc2hhZG93MSkiPgogICAgICA8Y2lyY2xlIGN4PSIxMTEwIiBjeT0iMzUwIiByPSIyMjUiIGZpbGw9IiMwYjJiNGQiIHN0cm9rZT0idXJsKCNnb2xkMSkiIHN0cm9rZS13aWR0aD0iOCIvPgogICAgICA8ZWxsaXBzZSBjeD0iMTExMCIgY3k9IjM1MCIgcng9IjEwOC4wIiByeT0iMjI1IiBmaWxsPSJub25lIiBzdHJva2U9IiM3ZGI1ZTQiIHN0cm9rZS13aWR0aD0iMyIgb3BhY2l0eT0iLjciLz4KICAgICAgPGVsbGlwc2UgY3g9IjExMTAiIGN5PSIzNTAiIHJ4PSIxNzUuNSIgcnk9IjIyNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjN2RiNWU0IiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9Ii40MiIvPgogICAgICA8cGF0aCBkPSJNODg1IDM1MEgxMzM1IE05MTYuNSAyNDguOFExMTEwIDMxNi4yIDEzMDMuNSAyNDguOCBNOTE2LjUgNDUxLjJRMTExMCAzODMuOCAxMzAzLjUgNDUxLjIiIHN0cm9rZT0iIzdkYjVlNCIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIiBvcGFjaXR5PSIuMzgiLz4KICAgICAgPHBhdGggZD0iTTk4Ni4yIDMyNy41IFExMDUzLjggMjI2LjIgMTExNC41IDI4Ny4wIFExMjExLjIgMzI3LjUgMTI0OS41IDM5MC41IFExMTY2LjIgNDgwLjUgMTA3Ni4yIDQyMi4wIFE5OTcuNSAzOTAuNSA5ODYuMiAzMjcuNVoiIGZpbGw9IiM0YjgyYWQiIG9wYWNpdHk9Ii41OCIvPgogICAgPC9nPgo8ZyBmaWx0ZXI9InVybCgjc2hhZG93MSkiPjxwYXRoIGQ9Ik0yODUgNjU1aDQyMGwtNDUtNTJIMzMwWiIgZmlsbD0iI2E2N2MzOSIvPjxwYXRoIGQ9Ik0zODAgNjAybDk1LTI3MCA5NSAyNzAiIGZpbGw9IiMxNzM5NWMiIHN0cm9rZT0idXJsKCNnb2xkMSkiIHN0cm9rZS13aWR0aD0iNiIvPjxwYXRoIGQ9Ik00MTAgNTA1aDEzME00MjUgNDU1aDEwME00NDAgNDA1aDcwIiBzdHJva2U9IiM5YmM2ZTgiIHN0cm9rZS13aWR0aD0iNyIvPjxwYXRoIGQ9Ik00NzUgMzMyVjIyME00NDUgMjU3aDYwIiBzdHJva2U9IiNjOWE5NjIiIHN0cm9rZS13aWR0aD0iOCIvPjxyZWN0IHg9IjYxMiIgeT0iNTM1IiB3aWR0aD0iMTkwIiBoZWlnaHQ9IjEwNSIgcng9IjEwIiBmaWxsPSIjMGExZjM3IiBzdHJva2U9IiM1Njg4YjUiIHN0cm9rZS13aWR0aD0iNSIvPjxwYXRoIGQ9Ik04MDIgNTc1aDE0ME04MDIgNjEwaDExNSIgc3Ryb2tlPSIjYzlhOTYyIiBzdHJva2Utd2lkdGg9IjUiLz48cGF0aCBkPSJNODI0IDIxMGMxOTAgMzUgMjU0IDk2IDMyNiAxODQiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCNnb2xkMSkiIHN0cm9rZS13aWR0aD0iOSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9nPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMjcwIDYxMCkiIGZpbHRlcj0idXJsKCNzaGFkb3cxKSI+PHBhdGggZD0iTTAgMGgxNzBsLTI4IDUySDMwWiIgZmlsbD0iIzBkMmM0ZCIvPjxyZWN0IHg9IjU1IiB5PSItMTE1IiB3aWR0aD0iNTUiIGhlaWdodD0iMTE1IiByeD0iMTAiIGZpbGw9IiNiODg5NDIiLz48cmVjdCB4PSIxMTIiIHk9Ii04OCIgd2lkdGg9IjM4IiBoZWlnaHQ9Ijg4IiByeD0iOCIgZmlsbD0iIzhhNjQyZSIvPjxjaXJjbGUgY3g9IjgyIiBjeT0iLTc4IiByPSI5IiBmaWxsPSIjMDcyMDM5Ii8+PHBhdGggZD0iTTM4IC0xMzVoMTE1IiBzdHJva2U9IiM5YmM2ZTgiIHN0cm9rZS13aWR0aD0iOCIvPjwvZz4KPHBhdGggZD0iTTAgODM4IFE0MDAgNzYwIDgwMCA4MjYgVDE2MDAgODAwIFY5MDBIMFoiIGZpbGw9IiMwMzA5MTQiIG9wYWNpdHk9Ii43Ii8+Cjwvc3ZnPg==" alt="تحلیل داوری بین‌المللی قراردادهای نفتی و تجارت انرژی">
                         <div class="main-news-overlay">
                             <span class="news-category">داوری بین‌المللی</span>
                             <h2>تحلیل جامع رأی دیوان داوری اتاق بازرگانی بین‌المللی در پرونده قرارداد نفتی ایران و شرکت‌های خارجی</h2>
@@ -1067,7 +1155,7 @@
                     <div class="secondary-news">
                         <article class="news-card reveal">
                             <div class="news-card-image">
-                                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop" alt="News">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDkwMCIgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIj4KPGRlZnM+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJiZzIiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwNzE4MmYiLz48c3RvcCBvZmZzZXQ9IjAuNTgiIHN0b3AtY29sb3I9IiMxMDJhNGUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwNTBlMWQiLz48L2xpbmVhckdyYWRpZW50PgogIDxyYWRpYWxHcmFkaWVudCBpZD0iZ2xvdzIiIGN4PSI3MCUiIGN5PSIzNSUiIHI9IjY1JSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMmM0YTdjIiBzdG9wLW9wYWNpdHk9Ii41NSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJjNGE3YyIgc3RvcC1vcGFjaXR5PSIwIi8+PC9yYWRpYWxHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQyIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZjBkMjhhIi8+PHN0b3Agb2Zmc2V0PSIwLjQ1IiBzdG9wLWNvbG9yPSIjYzlhOTYyIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOGU2ZTJmIi8+PC9saW5lYXJHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdsYXNzMiIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzgzYzdmZiIgc3RvcC1vcGFjaXR5PSIuNSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJjNGE3YyIgc3RvcC1vcGFjaXR5PSIuMSIvPjwvbGluZWFyR3JhZGllbnQ+CiAgPGZpbHRlciBpZD0ic2hhZG93MiIgeD0iLTQwJSIgeT0iLTQwJSIgd2lkdGg9IjE4MCUiIGhlaWdodD0iMTgwJSI+PGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjIwIiBzdGREZXZpYXRpb249IjE4IiBmbG9vZC1jb2xvcj0iIzAwMCIgZmxvb2Qtb3BhY2l0eT0iLjQ1Ii8+PC9maWx0ZXI+CiAgPGZpbHRlciBpZD0iYmx1cjIiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjIyIi8+PC9maWx0ZXI+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2JnMikiLz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2dsb3cyKSIvPgo8ZyBvcGFjaXR5PSIuMTgiIHN0cm9rZT0iIzc4YTlkNiIgc3Ryb2tlLXdpZHRoPSIxIj48cGF0aCBkPSJNMCA3MjBIMTYwME0wIDc2MEgxNjAwTTAgODAwSDE2MDAiLz48cGF0aCBkPSJNMjIwIDBWOTAwTTM0MCAwVjkwME0xNDYwIDBWOTAwIi8+PC9nPgo8Y2lyY2xlIGN4PSIxMjgwIiBjeT0iMTgwIiByPSIxNzAiIGZpbGw9IiNjOWE5NjIiIG9wYWNpdHk9Ii4wNiIgZmlsdGVyPSJ1cmwoI2JsdXIyKSIvPgo8ZyBmaWx0ZXI9InVybCgjc2hhZG93MikiPgogICAgICA8Y2lyY2xlIGN4PSIxMTUwIiBjeT0iMzgwIiByPSIyMzUiIGZpbGw9IiMwYjJiNGQiIHN0cm9rZT0idXJsKCNnb2xkMikiIHN0cm9rZS13aWR0aD0iOCIvPgogICAgICA8ZWxsaXBzZSBjeD0iMTE1MCIgY3k9IjM4MCIgcng9IjExMi44IiByeT0iMjM1IiBmaWxsPSJub25lIiBzdHJva2U9IiM3ZGI1ZTQiIHN0cm9rZS13aWR0aD0iMyIgb3BhY2l0eT0iLjciLz4KICAgICAgPGVsbGlwc2UgY3g9IjExNTAiIGN5PSIzODAiIHJ4PSIxODMuMyIgcnk9IjIzNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjN2RiNWU0IiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9Ii40MiIvPgogICAgICA8cGF0aCBkPSJNOTE1IDM4MEgxMzg1IE05NDcuOSAyNzQuMlExMTUwIDM0NC44IDEzNTIuMSAyNzQuMiBNOTQ3LjkgNDg1LjhRMTE1MCA0MTUuMiAxMzUyLjEgNDg1LjgiIHN0cm9rZT0iIzdkYjVlNCIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIiBvcGFjaXR5PSIuMzgiLz4KICAgICAgPHBhdGggZD0iTTEwMjAuOCAzNTYuNSBRMTA5MS4yIDI1MC44IDExNTQuNyAzMTQuMiBRMTI1NS44IDM1Ni41IDEyOTUuNyA0MjIuMyBRMTIwOC44IDUxNi4zIDExMTQuOCA0NTUuMiBRMTAzMi41IDQyMi4zIDEwMjAuOCAzNTYuNVoiIGZpbGw9IiM0YjgyYWQiIG9wYWNpdHk9Ii41OCIvPgogICAgPC9nPgo8ZyBmaWx0ZXI9InVybCgjc2hhZG93MikiPjxyZWN0IHg9IjMwMCIgeT0iMjQ1IiB3aWR0aD0iNDIwIiBoZWlnaHQ9IjI4MCIgcng9IjE4IiBmaWxsPSIjZjRmMGU2IiBzdHJva2U9InVybCgjZ29sZDIpIiBzdHJva2Utd2lkdGg9IjciIHRyYW5zZm9ybT0icm90YXRlKC02IDUxMCAzODUpIi8+PHJlY3QgeD0iMzYwIiB5PSIzMDAiIHdpZHRoPSI0MjAiIGhlaWdodD0iMjgwIiByeD0iMTgiIGZpbGw9IiNmZmZkZmEiIHN0cm9rZT0iIzZjOGZiMCIgc3Ryb2tlLXdpZHRoPSI2IiB0cmFuc2Zvcm09InJvdGF0ZSg1IDU3MCA0NDApIi8+PHBhdGggZD0iTTQyNSAzNzBoMjY1TTQyNSA0MTVoMjY1TTQyNSA0NjBoMjEwIiBzdHJva2U9IiMyZDRlNzIiIHN0cm9rZS13aWR0aD0iMTIiIG9wYWNpdHk9Ii41NSIvPgo8cGF0aCBkPSJNNzIwIDUxMGM4MC0xMDAgMTc1LTExMCAyNjUtMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCNnb2xkMikiIHN0cm9rZS13aWR0aD0iMTIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik05MzAgNDQ3bDQ1IDM1LTQ1IDM1TTY1MCA1NzBjLTgwIDEwMC0xNzAgMTAyLTI1NSAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNmFhNmQ4IiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNMzkwIDU5NGwtNDItMzEgMi01NCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNmFhNmQ4IiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L2c+CjxnIG9wYWNpdHk9Ii44NSI+PGNpcmNsZSBjeD0iMTAzNSIgY3k9IjMyMCIgcj0iMTgiIGZpbGw9IiNjOWE5NjIiLz48Y2lyY2xlIGN4PSIxMzI1IiBjeT0iNDQ1IiByPSIxOCIgZmlsbD0iIzgzYzdmZiIvPjxjaXJjbGUgY3g9IjEwNDAiIGN5PSI1NzAiIHI9IjE1IiBmaWxsPSIjYzlhOTYyIi8+PHBhdGggZD0iTTEwNTIgMzI2TDEyNjAgNDEwTTEwMzUgMzM3TDEwMzAgNTQwTTEzMjAgNDYzTDExODAgNTUwIiBzdHJva2U9IiNjOWE5NjIiIHN0cm9rZS13aWR0aD0iNCIgb3BhY2l0eT0iLjY1Ii8+PC9nPgo8cGF0aCBkPSJNMCA4MzggUTQwMCA3NjAgODAwIDgyNiBUMTYwMCA4MDAgVjkwMEgwWiIgZmlsbD0iIzAzMDkxNCIgb3BhY2l0eT0iLjciLz4KPC9zdmc+" alt="چالش‌های حقوقی قراردادهای بیع بین‌المللی و کنوانسیون وین">
                             </div>
                             <div class="news-card-content">
                                 <span class="news-category">حقوق اقتصادی</span>
@@ -1080,7 +1168,7 @@
 
                         <article class="news-card reveal">
                             <div class="news-card-image">
-                                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&h=400&fit=crop" alt="News">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDkwMCIgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIj4KPGRlZnM+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJiZzMiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwNzE4MmYiLz48c3RvcCBvZmZzZXQ9IjAuNTgiIHN0b3AtY29sb3I9IiMxMDJhNGUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwNTBlMWQiLz48L2xpbmVhckdyYWRpZW50PgogIDxyYWRpYWxHcmFkaWVudCBpZD0iZ2xvdzMiIGN4PSI3MCUiIGN5PSIzNSUiIHI9IjY1JSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMmM0YTdjIiBzdG9wLW9wYWNpdHk9Ii41NSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJjNGE3YyIgc3RvcC1vcGFjaXR5PSIwIi8+PC9yYWRpYWxHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQzIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZjBkMjhhIi8+PHN0b3Agb2Zmc2V0PSIwLjQ1IiBzdG9wLWNvbG9yPSIjYzlhOTYyIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOGU2ZTJmIi8+PC9saW5lYXJHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdsYXNzMyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzgzYzdmZiIgc3RvcC1vcGFjaXR5PSIuNSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJjNGE3YyIgc3RvcC1vcGFjaXR5PSIuMSIvPjwvbGluZWFyR3JhZGllbnQ+CiAgPGZpbHRlciBpZD0ic2hhZG93MyIgeD0iLTQwJSIgeT0iLTQwJSIgd2lkdGg9IjE4MCUiIGhlaWdodD0iMTgwJSI+PGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjIwIiBzdGREZXZpYXRpb249IjE4IiBmbG9vZC1jb2xvcj0iIzAwMCIgZmxvb2Qtb3BhY2l0eT0iLjQ1Ii8+PC9maWx0ZXI+CiAgPGZpbHRlciBpZD0iYmx1cjMiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjIyIi8+PC9maWx0ZXI+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2JnMykiLz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2dsb3czKSIvPgo8ZyBvcGFjaXR5PSIuMTgiIHN0cm9rZT0iIzc4YTlkNiIgc3Ryb2tlLXdpZHRoPSIxIj48cGF0aCBkPSJNMCA3MjBIMTYwME0wIDc2MEgxNjAwTTAgODAwSDE2MDAiLz48cGF0aCBkPSJNMjIwIDBWOTAwTTM0MCAwVjkwME0xNDYwIDBWOTAwIi8+PC9nPgo8Y2lyY2xlIGN4PSIxMjgwIiBjeT0iMTgwIiByPSIxNzAiIGZpbGw9IiNjOWE5NjIiIG9wYWNpdHk9Ii4wNiIgZmlsdGVyPSJ1cmwoI2JsdXIzKSIvPgo8ZyBmaWx0ZXI9InVybCgjc2hhZG93MykiPgogICAgICA8Y2lyY2xlIGN4PSIxMTcwIiBjeT0iMzgwIiByPSIyNDUiIGZpbGw9IiMwYjJiNGQiIHN0cm9rZT0idXJsKCNnb2xkMykiIHN0cm9rZS13aWR0aD0iOCIvPgogICAgICA8ZWxsaXBzZSBjeD0iMTE3MCIgY3k9IjM4MCIgcng9IjExNy42IiByeT0iMjQ1IiBmaWxsPSJub25lIiBzdHJva2U9IiM3ZGI1ZTQiIHN0cm9rZS13aWR0aD0iMyIgb3BhY2l0eT0iLjciLz4KICAgICAgPGVsbGlwc2UgY3g9IjExNzAiIGN5PSIzODAiIHJ4PSIxOTEuMSIgcnk9IjI0NSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjN2RiNWU0IiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9Ii40MiIvPgogICAgICA8cGF0aCBkPSJNOTI1IDM4MEgxNDE1IE05NTkuMyAyNjkuOFExMTcwIDM0My4yIDEzODAuNyAyNjkuOCBNOTU5LjMgNDkwLjJRMTE3MCA0MTYuOCAxMzgwLjcgNDkwLjIiIHN0cm9rZT0iIzdkYjVlNCIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIiBvcGFjaXR5PSIuMzgiLz4KICAgICAgPHBhdGggZD0iTTEwMzUuMiAzNTUuNSBRMTEwOC44IDI0NS4yIDExNzQuOSAzMTEuNCBRMTI4MC4yIDM1NS41IDEzMjEuOSA0MjQuMSBRMTIzMS4yIDUyMi4xIDExMzMuMiA0NTguNCBRMTA0Ny41IDQyNC4xIDEwMzUuMiAzNTUuNVoiIGZpbGw9IiM0YjgyYWQiIG9wYWNpdHk9Ii41OCIvPgogICAgPC9nPgo8ZyBmaWx0ZXI9InVybCgjc2hhZG93MykiPjxwYXRoIGQ9Ik0xMDEwIDUwMGM4NS0yMCAyMjAtMTUgMzIwIDI2IiBzdHJva2U9IiMxMTEiIHN0cm9rZS13aWR0aD0iMjYiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTAxNSA0ODVjMTIwIDc1IDIxMCAxMTUgMzM1IDIwTTEwMzUgNDQwYzEyMCA4MiAyMDUgOTUgMzAwIDE1IiBzdHJva2U9IiM2OTU3MzciIHN0cm9rZS13aWR0aD0iMTgiIGZpbGw9Im5vbmUiLz48cmVjdCB4PSIxMTE4IiB5PSI1NjUiIHdpZHRoPSIxMDUiIGhlaWdodD0iMTEwIiByeD0iMTYiIGZpbGw9InVybCgjZ29sZDMpIi8+PHJlY3QgeD0iMTE0MyIgeT0iNTQwIiB3aWR0aD0iNTUiIGhlaWdodD0iNTUiIHJ4PSIyOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZGZlOWY1IiBzdHJva2Utd2lkdGg9IjEyIi8+PHBhdGggZD0iTTExNjkgNTk1djQyIiBzdHJva2U9IiMwNzIwMzkiIHN0cm9rZS13aWR0aD0iOSIvPjxwYXRoIGQ9Ik0zOTAgNjUwaDMzME00MjAgNjEwaDI0NSIgc3Ryb2tlPSIjNmVhNGQwIiBzdHJva2Utd2lkdGg9IjYiLz48cGF0aCBkPSJNMzYwIDU4NWM5MC0xNTAgMTg1LTIxMCAzMDAtMjU1IiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE5NjIiIHN0cm9rZS13aWR0aD0iMTAiLz48cGF0aCBkPSJNNjkwIDMzMGw0MCAyMi00MiAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzlhOTYyIiBzdHJva2Utd2lkdGg9IjEwIi8+PC9nPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyNjAgMjIwKSIgb3BhY2l0eT0iLjkiPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxNTAiIGhlaWdodD0iNTgiIHJ4PSI4IiBmaWxsPSIjZDhlMmVkIi8+PHBhdGggZD0iTTE4IDE4aDExNE0xOCAzNGg4NSIgc3Ryb2tlPSIjMjg0ODY3IiBzdHJva2Utd2lkdGg9IjciLz48L2c+CjxwYXRoIGQ9Ik0wIDgzOCBRNDAwIDc2MCA4MDAgODI2IFQxNjAwIDgwMCBWOTAwSDBaIiBmaWxsPSIjMDMwOTE0IiBvcGFjaXR5PSIuNyIvPgo8L3N2Zz4=" alt="تحریم‌ها و قراردادهای تجاری بین‌المللی">
                             </div>
                             <div class="news-card-content">
                                 <span class="news-category">تجارت بین‌الملل</span>
@@ -1103,7 +1191,7 @@
                     <div class="news-list">
                         <article class="news-list-item reveal">
                             <div class="news-list-image">
-                                <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=400&h=300&fit=crop" alt="News">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDkwMCIgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIj4KPGRlZnM+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJiZzQiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwNzE4MmYiLz48c3RvcCBvZmZzZXQ9IjAuNTgiIHN0b3AtY29sb3I9IiMxMDJhNGUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwNTBlMWQiLz48L2xpbmVhckdyYWRpZW50PgogIDxyYWRpYWxHcmFkaWVudCBpZD0iZ2xvdzQiIGN4PSI3MCUiIGN5PSIzNSUiIHI9IjY1JSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMmM0YTdjIiBzdG9wLW9wYWNpdHk9Ii41NSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJjNGE3YyIgc3RvcC1vcGFjaXR5PSIwIi8+PC9yYWRpYWxHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQ0IiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZjBkMjhhIi8+PHN0b3Agb2Zmc2V0PSIwLjQ1IiBzdG9wLWNvbG9yPSIjYzlhOTYyIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOGU2ZTJmIi8+PC9saW5lYXJHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdsYXNzNCIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzgzYzdmZiIgc3RvcC1vcGFjaXR5PSIuNSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJjNGE3YyIgc3RvcC1vcGFjaXR5PSIuMSIvPjwvbGluZWFyR3JhZGllbnQ+CiAgPGZpbHRlciBpZD0ic2hhZG93NCIgeD0iLTQwJSIgeT0iLTQwJSIgd2lkdGg9IjE4MCUiIGhlaWdodD0iMTgwJSI+PGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjIwIiBzdGREZXZpYXRpb249IjE4IiBmbG9vZC1jb2xvcj0iIzAwMCIgZmxvb2Qtb3BhY2l0eT0iLjQ1Ii8+PC9maWx0ZXI+CiAgPGZpbHRlciBpZD0iYmx1cjQiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjIyIi8+PC9maWx0ZXI+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2JnNCkiLz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2dsb3c0KSIvPgo8ZyBvcGFjaXR5PSIuMTgiIHN0cm9rZT0iIzc4YTlkNiIgc3Ryb2tlLXdpZHRoPSIxIj48cGF0aCBkPSJNMCA3MjBIMTYwME0wIDc2MEgxNjAwTTAgODAwSDE2MDAiLz48cGF0aCBkPSJNMjIwIDBWOTAwTTM0MCAwVjkwME0xNDYwIDBWOTAwIi8+PC9nPgo8Y2lyY2xlIGN4PSIxMjgwIiBjeT0iMTgwIiByPSIxNzAiIGZpbGw9IiNjOWE5NjIiIG9wYWNpdHk9Ii4wNiIgZmlsdGVyPSJ1cmwoI2JsdXI0KSIvPgo8ZyBmaWx0ZXI9InVybCgjc2hhZG93NCkiPjxyZWN0IHg9IjI1MCIgeT0iNTEwIiB3aWR0aD0iODcwIiBoZWlnaHQ9IjEyMCIgcng9IjYwIiBmaWxsPSIjMGExZjM3IiBzdHJva2U9IiM0NTZjOTEiIHN0cm9rZS13aWR0aD0iNiIvPjxlbGxpcHNlIGN4PSI2ODUiIGN5PSI1NjUiIHJ4PSIzNTAiIHJ5PSI1NSIgZmlsbD0iIzEwMmY1MSIgc3Ryb2tlPSJ1cmwoI2dvbGQ0KSIgc3Ryb2tlLXdpZHRoPSI2Ii8+CjxjaXJjbGUgY3g9IjM5MCIgY3k9IjM5MCIgcj0iNTUiIGZpbGw9IiMxMTJiNGEiIHN0cm9rZT0iIzhjYjdkYSIgc3Ryb2tlLXdpZHRoPSI1Ii8+PHBhdGggZD0iTTM0MCA0OTVxNTAtNjIgMTAwIDAiIGZpbGw9IiMxNzNiNjEiIHN0cm9rZT0iIzhjYjdkYSIgc3Ryb2tlLXdpZHRoPSI1Ii8+PGNpcmNsZSBjeD0iNDk1IiBjeT0iMzkwIiByPSI1NSIgZmlsbD0iIzExMmI0YSIgc3Ryb2tlPSIjOGNiN2RhIiBzdHJva2Utd2lkdGg9IjUiLz48cGF0aCBkPSJNNDQ1IDQ5NXE1MC02MiAxMDAgMCIgZmlsbD0iIzE3M2I2MSIgc3Ryb2tlPSIjOGNiN2RhIiBzdHJva2Utd2lkdGg9IjUiLz48Y2lyY2xlIGN4PSI2MDAiIGN5PSIzOTAiIHI9IjU1IiBmaWxsPSIjMTEyYjRhIiBzdHJva2U9IiM4Y2I3ZGEiIHN0cm9rZS13aWR0aD0iNSIvPjxwYXRoIGQ9Ik01NTAgNDk1cTUwLTYyIDEwMCAwIiBmaWxsPSIjMTczYjYxIiBzdHJva2U9IiM4Y2I3ZGEiIHN0cm9rZS13aWR0aD0iNSIvPjxjaXJjbGUgY3g9IjcwNSIgY3k9IjM5MCIgcj0iNTUiIGZpbGw9IiMxMTJiNGEiIHN0cm9rZT0iIzhjYjdkYSIgc3Ryb2tlLXdpZHRoPSI1Ii8+PHBhdGggZD0iTTY1NSA0OTVxNTAtNjIgMTAwIDAiIGZpbGw9IiMxNzNiNjEiIHN0cm9rZT0iIzhjYjdkYSIgc3Ryb2tlLXdpZHRoPSI1Ii8+PGNpcmNsZSBjeD0iODEwIiBjeT0iMzkwIiByPSI1NSIgZmlsbD0iIzExMmI0YSIgc3Ryb2tlPSIjOGNiN2RhIiBzdHJva2Utd2lkdGg9IjUiLz48cGF0aCBkPSJNNzYwIDQ5NXE1MC02MiAxMDAgMCIgZmlsbD0iIzE3M2I2MSIgc3Ryb2tlPSIjOGNiN2RhIiBzdHJva2Utd2lkdGg9IjUiLz48Y2lyY2xlIGN4PSI5MTUiIGN5PSIzOTAiIHI9IjU1IiBmaWxsPSIjMTEyYjRhIiBzdHJva2U9IiM4Y2I3ZGEiIHN0cm9rZS13aWR0aD0iNSIvPjxwYXRoIGQ9Ik04NjUgNDk1cTUwLTYyIDEwMCAwIiBmaWxsPSIjMTczYjYxIiBzdHJva2U9IiM4Y2I3ZGEiIHN0cm9rZS13aWR0aD0iNSIvPgo8cGF0aCBkPSJNMTExMCAyODB2MzYwTTExMTAgMzIwaDE1ME0xMjYwIDMyMHYzMDAiIHN0cm9rZT0iI2M5YTk2MiIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZD0iTTEwMzAgMzUwaDE2NU0xMDQwIDM1MGwtNjAgMTI1TTExODUgMzUwbDYwIDEyNSIgc3Ryb2tlPSIjYzlhOTYyIiBzdHJva2Utd2lkdGg9IjciLz48cGF0aCBkPSJNOTgwIDQ3NWgyMjUiIHN0cm9rZT0iI2M5YTk2MiIgc3Ryb2tlLXdpZHRoPSI5Ii8+PHBhdGggZD0iTTEwMzUgNDgwcTAgMTAwIDc1IDEwMHQ3NS0xMDAiIGZpbGw9IiMxMjM2NTUiIHN0cm9rZT0iIzhhYjZkOCIgc3Ryb2tlLXdpZHRoPSI1Ii8+PC9nPgo8Y2lyY2xlIGN4PSIxMzIwIiBjeT0iMjMwIiByPSI5NSIgZmlsbD0idXJsKCNnbGFzczQpIiBvcGFjaXR5PSIuNTUiLz48cGF0aCBkPSJNMTI1MCAyMzBoMTQwTTEzMjAgMTYwdjE0MCIgc3Ryb2tlPSIjOGNjN2Y3IiBvcGFjaXR5PSIuNSIgc3Ryb2tlLXdpZHRoPSIzIi8+CjxwYXRoIGQ9Ik0wIDgzOCBRNDAwIDc2MCA4MDAgODI2IFQxNjAwIDgwMCBWOTAwSDBaIiBmaWxsPSIjMDMwOTE0IiBvcGFjaXR5PSIuNyIvPgo8L3N2Zz4=" alt="مسئولیت مدیران شرکت‌های سهامی و حاکمیت شرکتی">
                             </div>
                             <div class="news-list-content">
                                 <span class="news-category">حقوق شرکت‌ها</span>
@@ -1118,7 +1206,7 @@
 
                         <article class="news-list-item reveal">
                             <div class="news-list-image">
-                                <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=400&h=300&fit=crop" alt="News">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDkwMCIgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIj4KPGRlZnM+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJiZzUiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwNzE4MmYiLz48c3RvcCBvZmZzZXQ9IjAuNTgiIHN0b3AtY29sb3I9IiMxMDJhNGUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwNTBlMWQiLz48L2xpbmVhckdyYWRpZW50PgogIDxyYWRpYWxHcmFkaWVudCBpZD0iZ2xvdzUiIGN4PSI3MCUiIGN5PSIzNSUiIHI9IjY1JSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMmM0YTdjIiBzdG9wLW9wYWNpdHk9Ii41NSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJjNGE3YyIgc3RvcC1vcGFjaXR5PSIwIi8+PC9yYWRpYWxHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQ1IiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZjBkMjhhIi8+PHN0b3Agb2Zmc2V0PSIwLjQ1IiBzdG9wLWNvbG9yPSIjYzlhOTYyIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOGU2ZTJmIi8+PC9saW5lYXJHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdsYXNzNSIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzgzYzdmZiIgc3RvcC1vcGFjaXR5PSIuNSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJjNGE3YyIgc3RvcC1vcGFjaXR5PSIuMSIvPjwvbGluZWFyR3JhZGllbnQ+CiAgPGZpbHRlciBpZD0ic2hhZG93NSIgeD0iLTQwJSIgeT0iLTQwJSIgd2lkdGg9IjE4MCUiIGhlaWdodD0iMTgwJSI+PGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjIwIiBzdGREZXZpYXRpb249IjE4IiBmbG9vZC1jb2xvcj0iIzAwMCIgZmxvb2Qtb3BhY2l0eT0iLjQ1Ii8+PC9maWx0ZXI+CiAgPGZpbHRlciBpZD0iYmx1cjUiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjIyIi8+PC9maWx0ZXI+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2JnNSkiLz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2dsb3c1KSIvPgo8ZyBvcGFjaXR5PSIuMTgiIHN0cm9rZT0iIzc4YTlkNiIgc3Ryb2tlLXdpZHRoPSIxIj48cGF0aCBkPSJNMCA3MjBIMTYwME0wIDc2MEgxNjAwTTAgODAwSDE2MDAiLz48cGF0aCBkPSJNMjIwIDBWOTAwTTM0MCAwVjkwME0xNDYwIDBWOTAwIi8+PC9nPgo8Y2lyY2xlIGN4PSIxMjgwIiBjeT0iMTgwIiByPSIxNzAiIGZpbGw9IiNjOWE5NjIiIG9wYWNpdHk9Ii4wNiIgZmlsdGVyPSJ1cmwoI2JsdXI1KSIvPgo8ZyBmaWx0ZXI9InVybCgjc2hhZG93NSkiPjxyZWN0IHg9IjI1MCIgeT0iMjIwIiB3aWR0aD0iNTIwIiBoZWlnaHQ9IjQxMCIgcng9IjI0IiBmaWxsPSIjZjdmNGViIiB0cmFuc2Zvcm09InJvdGF0ZSgtNCA1MTAgNDI1KSIvPjxwYXRoIGQ9Ik0zMjAgMzE1aDMwME0zMjAgMzY1aDM0ME0zMjAgNDE1aDI2MCIgc3Ryb2tlPSIjMjQ0ODY2IiBzdHJva2Utd2lkdGg9IjEwIiBvcGFjaXR5PSIuNTUiLz48cGF0aCBkPSJNMzIwIDUxMEw0MjAgNDU1IDUwNSA1MDAgNjEwIDM4NSA2OTAgNDIwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE5NjIiIHN0cm9rZS13aWR0aD0iMTIiLz48Y2lyY2xlIGN4PSI0MjAiIGN5PSI0NTUiIHI9IjExIiBmaWxsPSIjYzlhOTYyIi8+PGNpcmNsZSBjeD0iNTA1IiBjeT0iNTAwIiByPSIxMSIgZmlsbD0iI2M5YTk2MiIvPjxjaXJjbGUgY3g9IjYxMCIgY3k9IjM4NSIgcj0iMTEiIGZpbGw9IiNjOWE5NjIiLz4KPGNpcmNsZSBjeD0iMTEzMCIgY3k9IjM3MCIgcj0iMjEwIiBmaWxsPSIjMGMzMTUzIiBzdHJva2U9InVybCgjZ29sZDUpIiBzdHJva2Utd2lkdGg9IjgiLz48dGV4dCB4PSIxMDY1IiB5PSI0MDUiIGZvbnQtc2l6ZT0iMTMwIiBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiNkYmU5ZjYiPuKCrDwvdGV4dD48dGV4dCB4PSIxMTg1IiB5PSIzMzAiIGZvbnQtc2l6ZT0iMTA1IiBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiNjOWE5NjIiPiQ8L3RleHQ+PHRleHQgeD0iMTE2MCIgeT0iNTAwIiBmb250LXNpemU9IjkwIiBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiM4NGM1ZjMiPsKlPC90ZXh0Pgo8cGF0aCBkPSJNOTA1IDYxMGMxMzAtODUgMjY1LTkwIDQ1MC0xMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNmViMmU4IiBzdHJva2Utd2lkdGg9IjgiIHN0cm9rZS1kYXNoYXJyYXk9IjE2IDE4Ii8+PC9nPgo8cGF0aCBkPSJNMCA4MzggUTQwMCA3NjAgODAwIDgyNiBUMTYwMCA4MDAgVjkwMEgwWiIgZmlsbD0iIzAzMDkxNCIgb3BhY2l0eT0iLjciLz4KPC9zdmc+" alt="نوسان نرخ ارز و قراردادهای بلندمدت تجاری">
                             </div>
                             <div class="news-list-content">
                                 <span class="news-category">تحولات اقتصادی</span>
@@ -1133,7 +1221,7 @@
 
                         <article class="news-list-item reveal">
                             <div class="news-list-image">
-                                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop" alt="News">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDkwMCIgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIj4KPGRlZnM+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJiZzYiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwNzE4MmYiLz48c3RvcCBvZmZzZXQ9IjAuNTgiIHN0b3AtY29sb3I9IiMxMDJhNGUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwNTBlMWQiLz48L2xpbmVhckdyYWRpZW50PgogIDxyYWRpYWxHcmFkaWVudCBpZD0iZ2xvdzYiIGN4PSI3MCUiIGN5PSIzNSUiIHI9IjY1JSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMmM0YTdjIiBzdG9wLW9wYWNpdHk9Ii41NSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJjNGE3YyIgc3RvcC1vcGFjaXR5PSIwIi8+PC9yYWRpYWxHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQ2IiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZjBkMjhhIi8+PHN0b3Agb2Zmc2V0PSIwLjQ1IiBzdG9wLWNvbG9yPSIjYzlhOTYyIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOGU2ZTJmIi8+PC9saW5lYXJHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdsYXNzNiIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzgzYzdmZiIgc3RvcC1vcGFjaXR5PSIuNSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJjNGE3YyIgc3RvcC1vcGFjaXR5PSIuMSIvPjwvbGluZWFyR3JhZGllbnQ+CiAgPGZpbHRlciBpZD0ic2hhZG93NiIgeD0iLTQwJSIgeT0iLTQwJSIgd2lkdGg9IjE4MCUiIGhlaWdodD0iMTgwJSI+PGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjIwIiBzdGREZXZpYXRpb249IjE4IiBmbG9vZC1jb2xvcj0iIzAwMCIgZmxvb2Qtb3BhY2l0eT0iLjQ1Ii8+PC9maWx0ZXI+CiAgPGZpbHRlciBpZD0iYmx1cjYiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjIyIi8+PC9maWx0ZXI+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2JnNikiLz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2dsb3c2KSIvPgo8ZyBvcGFjaXR5PSIuMTgiIHN0cm9rZT0iIzc4YTlkNiIgc3Ryb2tlLXdpZHRoPSIxIj48cGF0aCBkPSJNMCA3MjBIMTYwME0wIDc2MEgxNjAwTTAgODAwSDE2MDAiLz48cGF0aCBkPSJNMjIwIDBWOTAwTTM0MCAwVjkwME0xNDYwIDBWOTAwIi8+PC9nPgo8Y2lyY2xlIGN4PSIxMjgwIiBjeT0iMTgwIiByPSIxNzAiIGZpbGw9IiNjOWE5NjIiIG9wYWNpdHk9Ii4wNiIgZmlsdGVyPSJ1cmwoI2JsdXI2KSIvPgo8ZyBmaWx0ZXI9InVybCgjc2hhZG93NikiPgogICAgICA8Y2lyY2xlIGN4PSIxMTgwIiBjeT0iMzYwIiByPSIyNTAiIGZpbGw9IiMwYjJiNGQiIHN0cm9rZT0idXJsKCNnb2xkNikiIHN0cm9rZS13aWR0aD0iOCIvPgogICAgICA8ZWxsaXBzZSBjeD0iMTE4MCIgY3k9IjM2MCIgcng9IjEyMC4wIiByeT0iMjUwIiBmaWxsPSJub25lIiBzdHJva2U9IiM3ZGI1ZTQiIHN0cm9rZS13aWR0aD0iMyIgb3BhY2l0eT0iLjciLz4KICAgICAgPGVsbGlwc2UgY3g9IjExODAiIGN5PSIzNjAiIHJ4PSIxOTUuMCIgcnk9IjI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjN2RiNWU0IiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9Ii40MiIvPgogICAgICA8cGF0aCBkPSJNOTMwIDM2MEgxNDMwIE05NjUuMCAyNDcuNVExMTgwIDMyMi41IDEzOTUuMCAyNDcuNSBNOTY1LjAgNDcyLjVRMTE4MCAzOTcuNSAxMzk1LjAgNDcyLjUiIHN0cm9rZT0iIzdkYjVlNCIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIiBvcGFjaXR5PSIuMzgiLz4KICAgICAgPHBhdGggZD0iTTEwNDIuNSAzMzUuMCBRMTExNy41IDIyMi41IDExODUuMCAyOTAuMCBRMTI5Mi41IDMzNS4wIDEzMzUuMCA0MDUuMCBRMTI0Mi41IDUwNS4wIDExNDIuNSA0NDAuMCBRMTA1NS4wIDQwNS4wIDEwNDIuNSAzMzUuMFoiIGZpbGw9IiM0YjgyYWQiIG9wYWNpdHk9Ii41OCIvPgogICAgPC9nPgo8ZyBmaWx0ZXI9InVybCgjc2hhZG93NikiPjxwYXRoIGQ9Ik0yNjAgNjEwaDQxMCIgc3Ryb2tlPSIjNzg5OWI1IiBzdHJva2Utd2lkdGg9IjgiLz48cGF0aCBkPSJNMzEwIDU2MFYzOTBoMzEwdjE3MCIgZmlsbD0iIzBiMjc0NCIgc3Ryb2tlPSIjYzlhOTYyIiBzdHJva2Utd2lkdGg9IjgiLz48cGF0aCBkPSJNMjgwIDM5MGwxNzUtMTI1IDE3NSAxMjUiIGZpbGw9IiMxMzNiNWUiIHN0cm9rZT0idXJsKCNnb2xkNikiIHN0cm9rZS13aWR0aD0iOCIvPjxwYXRoIGQ9Ik0zOTAgNDMwdjEzME01MjAgNDMwdjEzMCIgc3Ryb2tlPSIjN2RhOWNiIiBzdHJva2Utd2lkdGg9IjEwIi8+PHBhdGggZD0iTTQyMCA2MTBoOTAiIHN0cm9rZT0iI2M5YTk2MiIgc3Ryb2tlLXdpZHRoPSIxMCIvPjxyZWN0IHg9IjcyMCIgeT0iNTIwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE3MCIgcng9IjE2IiBmaWxsPSIjZjdmNGVjIiB0cmFuc2Zvcm09InJvdGF0ZSgtNiA4NzAgNjA1KSIvPjxwYXRoIGQ9Ik03ODUgNTY1aDE4ME03ODUgNjA1aDE2ME03ODUgNjQ1aDExMCIgc3Ryb2tlPSIjMzY1Nzc2IiBzdHJva2Utd2lkdGg9IjkiIG9wYWNpdHk9Ii42Ii8+PHBhdGggZD0iTTEwMjAgNTgwYzUwIDI1IDkwIDQ1IDEzMCA5MCIgc3Ryb2tlPSIjYzlhOTYyIiBzdHJva2Utd2lkdGg9IjEwIiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTExMzAgNjcwbC0xMi01NSA1MyAxMCIgc3Ryb2tlPSIjYzlhOTYyIiBzdHJva2Utd2lkdGg9IjEwIiBmaWxsPSJub25lIi8+PC9nPgo8cGF0aCBkPSJNMCA4MzggUTQwMCA3NjAgODAwIDgyNiBUMTYwMCA4MDAgVjkwMEgwWiIgZmlsbD0iIzAzMDkxNCIgb3BhY2l0eT0iLjciLz4KPC9zdmc+" alt="کنوانسیون نیویورک و اجرای آراء داوری خارجی">
                             </div>
                             <div class="news-list-content">
                                 <span class="news-category">داوری</span>
@@ -1148,7 +1236,7 @@
 
                         <article class="news-list-item reveal">
                             <div class="news-list-image">
-                                <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=400&h=300&fit=crop" alt="News">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDkwMCIgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIj4KPGRlZnM+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJiZzciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwNzE4MmYiLz48c3RvcCBvZmZzZXQ9IjAuNTgiIHN0b3AtY29sb3I9IiMxMDJhNGUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwNTBlMWQiLz48L2xpbmVhckdyYWRpZW50PgogIDxyYWRpYWxHcmFkaWVudCBpZD0iZ2xvdzciIGN4PSI3MCUiIGN5PSIzNSUiIHI9IjY1JSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMmM0YTdjIiBzdG9wLW9wYWNpdHk9Ii41NSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJjNGE3YyIgc3RvcC1vcGFjaXR5PSIwIi8+PC9yYWRpYWxHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQ3IiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZjBkMjhhIi8+PHN0b3Agb2Zmc2V0PSIwLjQ1IiBzdG9wLWNvbG9yPSIjYzlhOTYyIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOGU2ZTJmIi8+PC9saW5lYXJHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdsYXNzNyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzgzYzdmZiIgc3RvcC1vcGFjaXR5PSIuNSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJjNGE3YyIgc3RvcC1vcGFjaXR5PSIuMSIvPjwvbGluZWFyR3JhZGllbnQ+CiAgPGZpbHRlciBpZD0ic2hhZG93NyIgeD0iLTQwJSIgeT0iLTQwJSIgd2lkdGg9IjE4MCUiIGhlaWdodD0iMTgwJSI+PGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjIwIiBzdGREZXZpYXRpb249IjE4IiBmbG9vZC1jb2xvcj0iIzAwMCIgZmxvb2Qtb3BhY2l0eT0iLjQ1Ii8+PC9maWx0ZXI+CiAgPGZpbHRlciBpZD0iYmx1cjciPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjIyIi8+PC9maWx0ZXI+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2JnNykiLz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2dsb3c3KSIvPgo8ZyBvcGFjaXR5PSIuMTgiIHN0cm9rZT0iIzc4YTlkNiIgc3Ryb2tlLXdpZHRoPSIxIj48cGF0aCBkPSJNMCA3MjBIMTYwME0wIDc2MEgxNjAwTTAgODAwSDE2MDAiLz48cGF0aCBkPSJNMjIwIDBWOTAwTTM0MCAwVjkwME0xNDYwIDBWOTAwIi8+PC9nPgo8Y2lyY2xlIGN4PSIxMjgwIiBjeT0iMTgwIiByPSIxNzAiIGZpbGw9IiNjOWE5NjIiIG9wYWNpdHk9Ii4wNiIgZmlsdGVyPSJ1cmwoI2JsdXI3KSIvPgo8ZyBmaWx0ZXI9InVybCgjc2hhZG93NykiPjxyZWN0IHg9IjI3MCIgeT0iMjUwIiB3aWR0aD0iMzYwIiBoZWlnaHQ9IjM2MCIgcng9IjE4IiBmaWxsPSIjMGExZjM3IiBzdHJva2U9IiM3NWE4ZDUiIHN0cm9rZS13aWR0aD0iNyIvPjxwYXRoIGQ9Ik0zMzAgNjEwVjM1MGgyNDB2MjYwIiBmaWxsPSIjMTIzNjU1Ii8+PHBhdGggZD0iTTMxMCAzNTBsMTQwLTEwNSAxNDAgMTA1IiBmaWxsPSIjMTk0NjZlIiBzdHJva2U9InVybCgjZ29sZDcpIiBzdHJva2Utd2lkdGg9IjciLz48cGF0aCBkPSJNMzcwIDQwNWgxNzBNMzcwIDQ1NWgxNzBNMzcwIDUwNWgxMzAiIHN0cm9rZT0iI2E3YzdlMSIgc3Ryb2tlLXdpZHRoPSIxMiIgb3BhY2l0eT0iLjU1Ii8+PHJlY3QgeD0iODA1IiB5PSIyMTAiIHdpZHRoPSI0MzAiIGhlaWdodD0iMjkwIiByeD0iMjAiIGZpbGw9IiNmN2Y0ZWIiIHRyYW5zZm9ybT0icm90YXRlKDQgMTAyMCAzNTUpIi8+PHBhdGggZD0iTTg5MCAzMDBoMjYwTTg5MCAzNDVoMjQ1TTg5MCAzOTBoMjE1IiBzdHJva2U9IiMzMjU1NzYiIHN0cm9rZS13aWR0aD0iMTAiIG9wYWNpdHk9Ii42Ii8+PHBhdGggZD0iTTY0NSA0MjBjOTAtMTEwIDE0MC0xMDAgMTkwIDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YTk2MiIgc3Ryb2tlLXdpZHRoPSIxMiIvPjxwYXRoIGQ9Ik04MjAgNDIwbC0zNC0zMU04MjAgNDIwbC0xMCA0OCIgc3Ryb2tlPSIjYzlhOTYyIiBzdHJva2Utd2lkdGg9IjEwIi8+PHBhdGggZD0iTTEyNDUgNTYwYzEwNSAzMCAxNTUgNzAgMTg1IDEyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNmViNWU3IiBzdHJva2Utd2lkdGg9IjkiLz48cGF0aCBkPSJNMTQyNyA2NjJsLTMgNDUgNDQtMTIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzZlYjVlNyIgc3Ryb2tlLXdpZHRoPSI5Ii8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTA0MCA1NjApIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTM1IiBoZWlnaHQ9IjgwIiByeD0iMTAiIGZpbGw9IiMwZTJkNGMiIHN0cm9rZT0idXJsKCNnb2xkNykiIHN0cm9rZS13aWR0aD0iNSIvPjxwYXRoIGQ9Ik0yOCA0MGg4MCIgc3Ryb2tlPSIjYTdjN2UxIiBzdHJva2Utd2lkdGg9IjEwIi8+PC9nPjwvZz4KPHBhdGggZD0iTTAgODM4IFE0MDAgNzYwIDgwMCA4MjYgVDE2MDAgODAwIFY5MDBIMFoiIGZpbGw9IiMwMzA5MTQiIG9wYWNpdHk9Ii43Ii8+Cjwvc3ZnPg==" alt="اعتبار اسنادی LC و مقررات UCP 600">
                             </div>
                             <div class="news-list-content">
                                 <span class="news-category">حقوق بانکی</span>
@@ -1173,48 +1261,55 @@
                     <div class="secondary-news">
                         <article class="news-card reveal">
                             <div class="news-card-image">
-                                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&h=400&fit=crop" alt="Article">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDkwMCIgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIj4KPGRlZnM+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJiZzgiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwNzE4MmYiLz48c3RvcCBvZmZzZXQ9IjAuNTgiIHN0b3AtY29sb3I9IiMxMDJhNGUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwNTBlMWQiLz48L2xpbmVhckdyYWRpZW50PgogIDxyYWRpYWxHcmFkaWVudCBpZD0iZ2xvdzgiIGN4PSI3MCUiIGN5PSIzNSUiIHI9IjY1JSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMmM0YTdjIiBzdG9wLW9wYWNpdHk9Ii41NSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJjNGE3YyIgc3RvcC1vcGFjaXR5PSIwIi8+PC9yYWRpYWxHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQ4IiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZjBkMjhhIi8+PHN0b3Agb2Zmc2V0PSIwLjQ1IiBzdG9wLWNvbG9yPSIjYzlhOTYyIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOGU2ZTJmIi8+PC9saW5lYXJHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdsYXNzOCIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzgzYzdmZiIgc3RvcC1vcGFjaXR5PSIuNSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJjNGE3YyIgc3RvcC1vcGFjaXR5PSIuMSIvPjwvbGluZWFyR3JhZGllbnQ+CiAgPGZpbHRlciBpZD0ic2hhZG93OCIgeD0iLTQwJSIgeT0iLTQwJSIgd2lkdGg9IjE4MCUiIGhlaWdodD0iMTgwJSI+PGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjIwIiBzdGREZXZpYXRpb249IjE4IiBmbG9vZC1jb2xvcj0iIzAwMCIgZmxvb2Qtb3BhY2l0eT0iLjQ1Ii8+PC9maWx0ZXI+CiAgPGZpbHRlciBpZD0iYmx1cjgiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjIyIi8+PC9maWx0ZXI+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2JnOCkiLz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2dsb3c4KSIvPgo8ZyBvcGFjaXR5PSIuMTgiIHN0cm9rZT0iIzc4YTlkNiIgc3Ryb2tlLXdpZHRoPSIxIj48cGF0aCBkPSJNMCA3MjBIMTYwME0wIDc2MEgxNjAwTTAgODAwSDE2MDAiLz48cGF0aCBkPSJNMjIwIDBWOTAwTTM0MCAwVjkwME0xNDYwIDBWOTAwIi8+PC9nPgo8Y2lyY2xlIGN4PSIxMjgwIiBjeT0iMTgwIiByPSIxNzAiIGZpbGw9IiNjOWE5NjIiIG9wYWNpdHk9Ii4wNiIgZmlsdGVyPSJ1cmwoI2JsdXI4KSIvPgo8ZyBmaWx0ZXI9InVybCgjc2hhZG93OCkiPjxnIGZpbHRlcj0idXJsKCNzaGFkb3c4KSI+CiAgICAgIDxjaXJjbGUgY3g9IjExMjAiIGN5PSI0MDUiIHI9IjIzNSIgZmlsbD0iIzBiMmI0ZCIgc3Ryb2tlPSJ1cmwoI2dvbGQ4KSIgc3Ryb2tlLXdpZHRoPSI4Ii8+CiAgICAgIDxlbGxpcHNlIGN4PSIxMTIwIiBjeT0iNDA1IiByeD0iMTEyLjgiIHJ5PSIyMzUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdkYjVlNCIgc3Ryb2tlLXdpZHRoPSIzIiBvcGFjaXR5PSIuNyIvPgogICAgICA8ZWxsaXBzZSBjeD0iMTEyMCIgY3k9IjQwNSIgcng9IjE4My4zIiByeT0iMjM1IiBmaWxsPSJub25lIiBzdHJva2U9IiM3ZGI1ZTQiIHN0cm9rZS13aWR0aD0iMiIgb3BhY2l0eT0iLjQyIi8+CiAgICAgIDxwYXRoIGQ9Ik04ODUgNDA1SDEzNTUgTTkxNy45IDI5OS4yUTExMjAgMzY5LjggMTMyMi4xIDI5OS4yIE05MTcuOSA1MTAuOFExMTIwIDQ0MC4yIDEzMjIuMSA1MTAuOCIgc3Ryb2tlPSIjN2RiNWU0IiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiIG9wYWNpdHk9Ii4zOCIvPgogICAgICA8cGF0aCBkPSJNOTkwLjggMzgxLjUgUTEwNjEuMiAyNzUuOCAxMTI0LjcgMzM5LjIgUTEyMjUuOCAzODEuNSAxMjY1LjcgNDQ3LjMgUTExNzguOCA1NDEuMyAxMDg0LjggNDgwLjIgUTEwMDIuNSA0NDcuMyA5OTAuOCAzODEuNVoiIGZpbGw9IiM0YjgyYWQiIG9wYWNpdHk9Ii41OCIvPgogICAgPC9nPjxwYXRoIGQ9Ik04MDUgMzAwQzY5MCAyMjAgNTY1IDIxNSA0NzAgMjgwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWE5NjIiIHN0cm9rZS13aWR0aD0iMTEiLz48cGF0aCBkPSJNNzk1IDYyMGMtMTIwIDg1LTI0MCA5MC0zNDAgMjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzc2YjdlOCIgc3Ryb2tlLXdpZHRoPSIxMSIvPgo8cGF0aCBkPSJNNDEwIDY0NXYtMjM1TTQxMCA0MTBoMTE1TTUyNSA0MTB2MjM1IiBzdHJva2U9IiNjOWE5NjIiIHN0cm9rZS13aWR0aD0iOCIvPjxwYXRoIGQ9Ik0zOTIgNDEwbDc2LTYwIDc2IDYwIiBmaWxsPSIjMTUzYzYxIiBzdHJva2U9IiNjOWE5NjIiIHN0cm9rZS13aWR0aD0iNyIvPjxwYXRoIGQ9Ik0xMzEwIDY0NXYtMjM1TTEzMTAgNDEwaDExNU0xNDI1IDQxMHYyMzUiIHN0cm9rZT0iIzZkYjNlNyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZD0iTTEyOTIgNDEwbDc2LTYwIDc2IDYwIiBmaWxsPSIjMTgzYTU4IiBzdHJva2U9IiM2ZGIzZTciIHN0cm9rZS13aWR0aD0iNyIvPgo8cGF0aCBkPSJNOTE1IDU4NWM4NS03NSAxNjAtNzUgMjUwIDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YTk2MiIgc3Ryb2tlLXdpZHRoPSIxMCIvPjxwYXRoIGQ9Ik0xMDM4IDU4NWwtNDAtMzNNMTAzOCA1ODVsMzgtMzgiIHN0cm9rZT0iI2M5YTk2MiIgc3Ryb2tlLXdpZHRoPSIxMCIvPjwvZz4KPHBhdGggZD0iTTAgODM4IFE0MDAgNzYwIDgwMCA4MjYgVDE2MDAgODAwIFY5MDBIMFoiIGZpbGw9IiMwMzA5MTQiIG9wYWNpdHk9Ii43Ii8+Cjwvc3ZnPg==" alt="داوری سرمایه‌گذاری در پرتو موافقت‌نامه‌های دوجانبه سرمایه‌گذاری (BITs)">
                             </div>
                             <div class="news-card-content">
                                 <h3>داوری سرمایه‌گذاری در پرتو موافقت‌نامه‌های دوجانبه سرمایه‌گذاری (BITs)</h3>
-                                <p class="news-card-excerpt">بررسی سازوکارهای حل‌وفصل اختلافات سرمایه‌گذاری بین دولتها و سرمایه‌گذاران خارجی...</p>
+                                <p class="news-card-excerpt">بررسی سازوکارهای حل‌وفصل اختلافات سرمایه‌گذاری بین دولت‌ها و سرمایه‌گذاران خارجی...</p>
                             </div>
                         </article>
-
                         <article class="news-card reveal">
                             <div class="news-card-image">
-                                <img src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=600&h=400&fit=crop" alt="Article">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDkwMCIgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIj4KPGRlZnM+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJiZzkiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwNzE4MmYiLz48c3RvcCBvZmZzZXQ9IjAuNTgiIHN0b3AtY29sb3I9IiMxMDJhNGUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwNTBlMWQiLz48L2xpbmVhckdyYWRpZW50PgogIDxyYWRpYWxHcmFkaWVudCBpZD0iZ2xvdzkiIGN4PSI3MCUiIGN5PSIzNSUiIHI9IjY1JSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMmM0YTdjIiBzdG9wLW9wYWNpdHk9Ii41NSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJjNGE3YyIgc3RvcC1vcGFjaXR5PSIwIi8+PC9yYWRpYWxHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQ5IiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZjBkMjhhIi8+PHN0b3Agb2Zmc2V0PSIwLjQ1IiBzdG9wLWNvbG9yPSIjYzlhOTYyIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOGU2ZTJmIi8+PC9saW5lYXJHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdsYXNzOSIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzgzYzdmZiIgc3RvcC1vcGFjaXR5PSIuNSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzJjNGE3YyIgc3RvcC1vcGFjaXR5PSIuMSIvPjwvbGluZWFyR3JhZGllbnQ+CiAgPGZpbHRlciBpZD0ic2hhZG93OSIgeD0iLTQwJSIgeT0iLTQwJSIgd2lkdGg9IjE4MCUiIGhlaWdodD0iMTgwJSI+PGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjIwIiBzdGREZXZpYXRpb249IjE4IiBmbG9vZC1jb2xvcj0iIzAwMCIgZmxvb2Qtb3BhY2l0eT0iLjQ1Ii8+PC9maWx0ZXI+CiAgPGZpbHRlciBpZD0iYmx1cjkiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjIyIi8+PC9maWx0ZXI+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2JnOSkiLz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2dsb3c5KSIvPgo8ZyBvcGFjaXR5PSIuMTgiIHN0cm9rZT0iIzc4YTlkNiIgc3Ryb2tlLXdpZHRoPSIxIj48cGF0aCBkPSJNMCA3MjBIMTYwME0wIDc2MEgxNjAwTTAgODAwSDE2MDAiLz48cGF0aCBkPSJNMjIwIDBWOTAwTTM0MCAwVjkwME0xNDYwIDBWOTAwIi8+PC9nPgo8Y2lyY2xlIGN4PSIxMjgwIiBjeT0iMTgwIiByPSIxNzAiIGZpbGw9IiNjOWE5NjIiIG9wYWNpdHk9Ii4wNiIgZmlsdGVyPSJ1cmwoI2JsdXI5KSIvPgo8ZyBmaWx0ZXI9InVybCgjc2hhZG93OSkiPjxjaXJjbGUgY3g9IjUwMCIgY3k9IjQxMCIgcj0iMTk1IiBmaWxsPSIjMGIzMTUzIiBzdHJva2U9IiNjOWE5NjIiIHN0cm9rZS13aWR0aD0iNyIvPjxnIGZpbGw9IiNmM2Q3N2QiPjxjaXJjbGUgY3g9IjY1MCIgY3k9IjQxMCIgcj0iOSIvPjxjaXJjbGUgY3g9IjYyOSIgY3k9IjQ4NCIgcj0iOSIvPjxjaXJjbGUgY3g9IjU3NSIgY3k9IjUzOSIgcj0iOSIvPjxjaXJjbGUgY3g9IjUwMCIgY3k9IjU2MCIgcj0iOSIvPjxjaXJjbGUgY3g9IjQyNiIgY3k9IjUzOSIgcj0iOSIvPjxjaXJjbGUgY3g9IjM3MSIgY3k9IjQ4NCIgcj0iOSIvPjxjaXJjbGUgY3g9IjM1MCIgY3k9IjQxMCIgcj0iOSIvPjxjaXJjbGUgY3g9IjM3MSIgY3k9IjMzNiIgcj0iOSIvPjxjaXJjbGUgY3g9IjQyNSIgY3k9IjI4MSIgcj0iOSIvPjxjaXJjbGUgY3g9IjUwMCIgY3k9IjI2MCIgcj0iOSIvPjxjaXJjbGUgY3g9IjU3NSIgY3k9IjI4MSIgcj0iOSIvPjxjaXJjbGUgY3g9IjYyOSIgY3k9IjMzNSIgcj0iOSIvPjwvZz48cGF0aCBkPSJNNDEwIDUyMGgxODBNNDQwIDUyMFYzOTBoNTV2MTMwTTUxNSA1MjBWMzU1aDU1djE2NSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjN2NiNWU0IiBzdHJva2Utd2lkdGg9IjE0Ii8+CjxwYXRoIGQ9Ik05MzAgNjEwaDM3ME05NjAgNjEwVjM2MGgyNTB2MjUwIiBmaWxsPSIjMGUyYjQ5IiBzdHJva2U9IiM2ZWFhZDciIHN0cm9rZS13aWR0aD0iNiIvPjxwYXRoIGQ9Ik0xMDEwIDQyMGw0NS01OCA0NSA1OE0xMTEwIDQxMGw0NS00OCA0NSA0OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzlhOTYyIiBzdHJva2Utd2lkdGg9IjciLz48cGF0aCBkPSJNOTA1IDY0MGg0MjAiIHN0cm9rZT0iI2M5YTk2MiIgc3Ryb2tlLXdpZHRoPSIxMCIvPjxwYXRoIGQ9Ik03MDAgNDkwYzkwLTIwIDE2MC0yMCAyMzAgMCIgc3Ryb2tlPSIjNmViNWU3IiBzdHJva2Utd2lkdGg9IjgiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNODYwIDQ5MGwzNi0zME04NjAgNDkwbDM2IDI0IiBzdHJva2U9IiM2ZWI1ZTciIHN0cm9rZS13aWR0aD0iOCIvPjwvZz4KPHBhdGggZD0iTTAgODM4IFE0MDAgNzYwIDgwMCA4MjYgVDE2MDAgODAwIFY5MDBIMFoiIGZpbGw9IiMwMzA5MTQiIG9wYWNpdHk9Ii43Ii8+Cjwvc3ZnPg==" alt="حقوق رقابت در اتحادیه اروپا و تأثیر آن بر شرکت‌های ایرانی">
                             </div>
                             <div class="news-card-content">
                                 <h3>حقوق رقابت در اتحادیه اروپا و تأثیر آن بر شرکت‌های ایرانی</h3>
-                                <p class="news-card-excerpt">تحلیل مقررات ضد انحصار اروپا و الزامات compliance برای شرکت‌های فعال در بازار اروپا...</p>
+                                <p class="news-card-excerpt">تحلیل مقررات ضد انحصار اروپا و الزامات رقابت برای شرکت‌های فعال در بازار اروپا...</p>
                             </div>
                         </article>
-
                         <article class="news-card reveal">
                             <div class="news-card-image">
-                                <img src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=600&h=400&fit=crop" alt="Article">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDkwMCIgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIj4KPGRlZnM+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJiZzEwIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMDcxODJmIi8+PHN0b3Agb2Zmc2V0PSIwLjU4IiBzdG9wLWNvbG9yPSIjMTAyYTRlIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDUwZTFkIi8+PC9saW5lYXJHcmFkaWVudD4KICA8cmFkaWFsR3JhZGllbnQgaWQ9Imdsb3cxMCIgY3g9IjcwJSIgY3k9IjM1JSIgcj0iNjUlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyYzRhN2MiIHN0b3Atb3BhY2l0eT0iLjU1Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMmM0YTdjIiBzdG9wLW9wYWNpdHk9IjAiLz48L3JhZGlhbEdyYWRpZW50PgogIDxsaW5lYXJHcmFkaWVudCBpZD0iZ29sZDEwIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZjBkMjhhIi8+PHN0b3Agb2Zmc2V0PSIwLjQ1IiBzdG9wLWNvbG9yPSIjYzlhOTYyIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOGU2ZTJmIi8+PC9saW5lYXJHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdsYXNzMTAiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM4M2M3ZmYiIHN0b3Atb3BhY2l0eT0iLjUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyYzRhN2MiIHN0b3Atb3BhY2l0eT0iLjEiLz48L2xpbmVhckdyYWRpZW50PgogIDxmaWx0ZXIgaWQ9InNoYWRvdzEwIiB4PSItNDAlIiB5PSItNDAlIiB3aWR0aD0iMTgwJSIgaGVpZ2h0PSIxODAlIj48ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iMjAiIHN0ZERldmlhdGlvbj0iMTgiIGZsb29kLWNvbG9yPSIjMDAwIiBmbG9vZC1vcGFjaXR5PSIuNDUiLz48L2ZpbHRlcj4KICA8ZmlsdGVyIGlkPSJibHVyMTAiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjIyIi8+PC9maWx0ZXI+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2JnMTApIi8+CjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnbG93MTApIi8+CjxnIG9wYWNpdHk9Ii4xOCIgc3Ryb2tlPSIjNzhhOWQ2IiBzdHJva2Utd2lkdGg9IjEiPjxwYXRoIGQ9Ik0wIDcyMEgxNjAwTTAgNzYwSDE2MDBNMCA4MDBIMTYwMCIvPjxwYXRoIGQ9Ik0yMjAgMFY5MDBNMzQwIDBWOTAwTTE0NjAgMFY5MDAiLz48L2c+CjxjaXJjbGUgY3g9IjEyODAiIGN5PSIxODAiIHI9IjE3MCIgZmlsbD0iI2M5YTk2MiIgb3BhY2l0eT0iLjA2IiBmaWx0ZXI9InVybCgjYmx1cjEwKSIvPgo8ZyBmaWx0ZXI9InVybCgjc2hhZG93MTApIj48cGF0aCBkPSJNMjUwIDY1MGgxMTIwIiBzdHJva2U9IiMyNDQ5NjciIHN0cm9rZS13aWR0aD0iMTYiLz48cGF0aCBkPSJNMjkwIDYxMGgyNDBsMTAwLTE2MGgyNjVsMTA1IDE2MGgyNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhiYjVkNyIgc3Ryb2tlLXdpZHRoPSIzMCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjYzNSIgY3k9IjQ1MCIgcj0iNDgiIGZpbGw9IiMwYjI3NDQiIHN0cm9rZT0iI2M5YTk2MiIgc3Ryb2tlLXdpZHRoPSI5Ii8+PHBhdGggZD0iTTExMjAgNjEwVjI3NU0xMDgwIDMyMGg4ME0xMDQ1IDM2MGgxNTAiIHN0cm9rZT0iI2M5YTk2MiIgc3Ryb2tlLXdpZHRoPSIxMSIvPjxwYXRoIGQ9Ik05OTAgMjc1bDEzMC0xMDAgMTMwIDEwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjN2ViOGU3IiBzdHJva2Utd2lkdGg9IjEwIi8+PHBhdGggZD0iTTM5MCA2MTBWMzUwaDEyMHYyNjAiIHN0cm9rZT0iI2M5YTk2MiIgc3Ryb2tlLXdpZHRoPSI5IiBmaWxsPSIjMTIzODVkIi8+PHBhdGggZD0iTTQ1MCAzNTBWMjQ1IiBzdHJva2U9IiNjOWE5NjIiIHN0cm9rZS13aWR0aD0iOSIvPjxwYXRoIGQ9Ik0zNTAgMzAwaDIwMCIgc3Ryb2tlPSIjYzlhOTYyIiBzdHJva2Utd2lkdGg9IjkiLz48cmVjdCB4PSI3ODAiIHk9IjIyMCIgd2lkdGg9IjI2MCIgaGVpZ2h0PSIxNTAiIHJ4PSIxNCIgZmlsbD0iI2Y3ZjRlYyIgdHJhbnNmb3JtPSJyb3RhdGUoLTQgOTEwIDI5NSkiLz48cGF0aCBkPSJNODMwIDI2NWgxNjBNODMwIDMwNWgxNDBNODMwIDM0NWgxMDAiIHN0cm9rZT0iIzMxNTU3NCIgc3Ryb2tlLXdpZHRoPSI5IiBvcGFjaXR5PSIuNiIvPjwvZz4KPHBhdGggZD0iTTAgODM4IFE0MDAgNzYwIDgwMCA4MjYgVDE2MDAgODAwIFY5MDBIMFoiIGZpbGw9IiMwMzA5MTQiIG9wYWNpdHk9Ii43Ii8+Cjwvc3ZnPg==" alt="قراردادهای EPC در پروژه‌های نفت و گاز: نکات کلیدی حقوقی">
                             </div>
                             <div class="news-card-content">
                                 <h3>قراردادهای EPC در پروژه‌های نفت و گاز: نکات کلیدی حقوقی</h3>
                                 <p class="news-card-excerpt">بررسی شرایط عمومی و خصوصی قراردادهای مهندسی، تأمین و ساخت در صنعت نفت...</p>
                             </div>
                         </article>
-
                         <article class="news-card reveal">
                             <div class="news-card-image">
-                                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&h=400&fit=crop" alt="Article">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDkwMCIgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIj4KPGRlZnM+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJiZzExIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMDcxODJmIi8+PHN0b3Agb2Zmc2V0PSIwLjU4IiBzdG9wLWNvbG9yPSIjMTAyYTRlIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDUwZTFkIi8+PC9saW5lYXJHcmFkaWVudD4KICA8cmFkaWFsR3JhZGllbnQgaWQ9Imdsb3cxMSIgY3g9IjcwJSIgY3k9IjM1JSIgcj0iNjUlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyYzRhN2MiIHN0b3Atb3BhY2l0eT0iLjU1Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMmM0YTdjIiBzdG9wLW9wYWNpdHk9IjAiLz48L3JhZGlhbEdyYWRpZW50PgogIDxsaW5lYXJHcmFkaWVudCBpZD0iZ29sZDExIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZjBkMjhhIi8+PHN0b3Agb2Zmc2V0PSIwLjQ1IiBzdG9wLWNvbG9yPSIjYzlhOTYyIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOGU2ZTJmIi8+PC9saW5lYXJHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdsYXNzMTEiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM4M2M3ZmYiIHN0b3Atb3BhY2l0eT0iLjUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyYzRhN2MiIHN0b3Atb3BhY2l0eT0iLjEiLz48L2xpbmVhckdyYWRpZW50PgogIDxmaWx0ZXIgaWQ9InNoYWRvdzExIiB4PSItNDAlIiB5PSItNDAlIiB3aWR0aD0iMTgwJSIgaGVpZ2h0PSIxODAlIj48ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iMjAiIHN0ZERldmlhdGlvbj0iMTgiIGZsb29kLWNvbG9yPSIjMDAwIiBmbG9vZC1vcGFjaXR5PSIuNDUiLz48L2ZpbHRlcj4KICA8ZmlsdGVyIGlkPSJibHVyMTEiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjIyIi8+PC9maWx0ZXI+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2JnMTEpIi8+CjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnbG93MTEpIi8+CjxnIG9wYWNpdHk9Ii4xOCIgc3Ryb2tlPSIjNzhhOWQ2IiBzdHJva2Utd2lkdGg9IjEiPjxwYXRoIGQ9Ik0wIDcyMEgxNjAwTTAgNzYwSDE2MDBNMCA4MDBIMTYwMCIvPjxwYXRoIGQ9Ik0yMjAgMFY5MDBNMzQwIDBWOTAwTTE0NjAgMFY5MDAiLz48L2c+CjxjaXJjbGUgY3g9IjEyODAiIGN5PSIxODAiIHI9IjE3MCIgZmlsbD0iI2M5YTk2MiIgb3BhY2l0eT0iLjA2IiBmaWx0ZXI9InVybCgjYmx1cjExKSIvPgo8ZyBmaWx0ZXI9InVybCgjc2hhZG93MTEpIj48Y2lyY2xlIGN4PSI5MjAiIGN5PSI0MTAiIHI9IjIyMCIgZmlsbD0iIzBkMzQ1NiIgc3Ryb2tlPSIjMmQ3OGI2IiBzdHJva2Utd2lkdGg9IjciLz48ZyBzdHJva2U9IiM1ZWMyZmYiIHN0cm9rZS13aWR0aD0iNSIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iLjc1Ij48cGF0aCBkPSJNNzYwIDMzMGw3NS03MCA5NSA0NSA4MC03MCA3MCA3NS00MiA5MiA3MCA3Mi05MiA1OC04MC01NC04MCA2MC02NS04M3oiLz48cGF0aCBkPSJNODM1IDI2MGw3NSA2ME05MzAgMjc1bC0yNSAxMDhNMTAxMCAyNTVsLTU4IDkyTTEwOTAgMzMwbC0xMDAgMTVNMTA3MCA0NTJsLTc4LTc0TTEwMDAgNTUwbC01NC04OE04ODUgNTQwbDQ1LTk1TTc2MCA0NzBsMTIwLTM1Ii8+PC9nPjx0ZXh0IHg9Ijg1MCIgeT0iNDc1IiBmb250LXNpemU9IjE1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSJ1cmwoI2dvbGQxMSkiPuKCvzwvdGV4dD4KPHBhdGggZD0iTTEyMDAgMjAwbDExMCA4NS00MiA0OC0xMTAtODV6IiBmaWxsPSIjODI1ZjJhIiBzdHJva2U9IiNjOWE5NjIiIHN0cm9rZS13aWR0aD0iNiIvPjxyZWN0IHg9IjEyMTAiIHk9IjI5MCIgd2lkdGg9Ijk1IiBoZWlnaHQ9IjE0NSIgcng9IjIwIiBmaWxsPSIjNmY1MTI3IiBzdHJva2U9IiNkNWI1NmMiIHN0cm9rZS13aWR0aD0iNiIvPjxwYXRoIGQ9Ik0xMjQwIDI3MGMtMjUtODAgODUtODUgNTggMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZDViNTZjIiBzdHJva2Utd2lkdGg9IjE0Ii8+CjxwYXRoIGQ9Ik0zMzAgNjEwaDI4ME0zNjUgNTcwaDIxMCIgc3Ryb2tlPSIjN2JiNmRlIiBzdHJva2Utd2lkdGg9IjgiLz48cmVjdCB4PSIyNTAiIHk9IjM2NSIgd2lkdGg9IjE5MCIgaGVpZ2h0PSIxNDUiIHJ4PSIxNiIgZmlsbD0iI2Y3ZjRlYyIgdHJhbnNmb3JtPSJyb3RhdGUoLTEwIDM0NSA0NDApIi8+PHBhdGggZD0iTTI4NSA0MDVoMTIwTTI4NSA0NDVoMTAwTTI4NSA0ODJoNzUiIHN0cm9rZT0iIzM1NTg3NyIgc3Ryb2tlLXdpZHRoPSI4IiBvcGFjaXR5PSIuNjUiLz48L2c+CjxwYXRoIGQ9Ik0wIDgzOCBRNDAwIDc2MCA4MDAgODI2IFQxNjAwIDgwMCBWOTAwSDBaIiBmaWxsPSIjMDMwOTE0IiBvcGFjaXR5PSIuNyIvPgo8L3N2Zz4=" alt="رمزارزها و چالش‌های حقوقی: از منظر حقوق ایران و اسناد بین‌المللی">
                             </div>
                             <div class="news-card-content">
                                 <h3>رمزارزها و چالش‌های حقوقی: از منظر حقوق ایران و اسناد بین‌المللی</h3>
-                                <p class="news-card-excerpt">تحلیل وضعیت حقوقی ارزهای دیجیتال و قراردادهای هوشمند در نظام‌های حقوقی مختلف...</p>
+                                <p class="news-card-excerpt">تحلیل وضعیت حقوقی دارایی‌های دیجیتال و قراردادهای هوشمند در نظام‌های حقوقی مختلف...</p>
+                            </div>
+                        </article>
+                        <article class="news-card reveal">
+                            <div class="news-card-image">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDkwMCIgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIj4KPGRlZnM+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJiZzEyIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMDcxODJmIi8+PHN0b3Agb2Zmc2V0PSIwLjU4IiBzdG9wLWNvbG9yPSIjMTAyYTRlIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDUwZTFkIi8+PC9saW5lYXJHcmFkaWVudD4KICA8cmFkaWFsR3JhZGllbnQgaWQ9Imdsb3cxMiIgY3g9IjcwJSIgY3k9IjM1JSIgcj0iNjUlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyYzRhN2MiIHN0b3Atb3BhY2l0eT0iLjU1Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMmM0YTdjIiBzdG9wLW9wYWNpdHk9IjAiLz48L3JhZGlhbEdyYWRpZW50PgogIDxsaW5lYXJHcmFkaWVudCBpZD0iZ29sZDEyIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZjBkMjhhIi8+PHN0b3Agb2Zmc2V0PSIwLjQ1IiBzdG9wLWNvbG9yPSIjYzlhOTYyIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOGU2ZTJmIi8+PC9saW5lYXJHcmFkaWVudD4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImdsYXNzMTIiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM4M2M3ZmYiIHN0b3Atb3BhY2l0eT0iLjUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyYzRhN2MiIHN0b3Atb3BhY2l0eT0iLjEiLz48L2xpbmVhckdyYWRpZW50PgogIDxmaWx0ZXIgaWQ9InNoYWRvdzEyIiB4PSItNDAlIiB5PSItNDAlIiB3aWR0aD0iMTgwJSIgaGVpZ2h0PSIxODAlIj48ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iMjAiIHN0ZERldmlhdGlvbj0iMTgiIGZsb29kLWNvbG9yPSIjMDAwIiBmbG9vZC1vcGFjaXR5PSIuNDUiLz48L2ZpbHRlcj4KICA8ZmlsdGVyIGlkPSJibHVyMTIiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjIyIi8+PC9maWx0ZXI+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iOTAwIiBmaWxsPSJ1cmwoI2JnMTIpIi8+CjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjkwMCIgZmlsbD0idXJsKCNnbG93MTIpIi8+CjxnIG9wYWNpdHk9Ii4xOCIgc3Ryb2tlPSIjNzhhOWQ2IiBzdHJva2Utd2lkdGg9IjEiPjxwYXRoIGQ9Ik0wIDcyMEgxNjAwTTAgNzYwSDE2MDBNMCA4MDBIMTYwMCIvPjxwYXRoIGQ9Ik0yMjAgMFY5MDBNMzQwIDBWOTAwTTE0NjAgMFY5MDAiLz48L2c+CjxjaXJjbGUgY3g9IjEyODAiIGN5PSIxODAiIHI9IjE3MCIgZmlsbD0iI2M5YTk2MiIgb3BhY2l0eT0iLjA2IiBmaWx0ZXI9InVybCgjYmx1cjEyKSIvPgo8ZyBmaWx0ZXI9InVybCgjc2hhZG93MTIpIj48cmVjdCB4PSIyNjAiIHk9IjMxNSIgd2lkdGg9IjM2MCIgaGVpZ2h0PSIzMjAiIHJ4PSIxNiIgZmlsbD0iIzBiMjk0NiIgc3Ryb2tlPSIjN2NhZkQ3IiBzdHJva2Utd2lkdGg9IjciLz48cGF0aCBkPSJNMjQwIDMxNWwyMDAtMTQ1IDIwMCAxNDUiIGZpbGw9IiMxNjQzNmEiIHN0cm9rZT0idXJsKCNnb2xkMTIpIiBzdHJva2Utd2lkdGg9IjgiLz48cGF0aCBkPSJNMzMwIDM2MHYyMjVNNDMwIDM2MHYyMjVNNTMwIDM2MHYyMjUiIHN0cm9rZT0iI2M5YTk2MiIgc3Ryb2tlLXdpZHRoPSIxMiIvPjxwYXRoIGQ9Ik0yOTUgNTkwaDI3MCIgc3Ryb2tlPSIjYzlhOTYyIiBzdHJva2Utd2lkdGg9IjEyIi8+CjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDgwMCAyNDApIiBmaWx0ZXI9InVybCgjc2hhZG93MTIpIj48cmVjdCB3aWR0aD0iMzkwIiBoZWlnaHQ9IjI4MCIgcng9IjE4IiBmaWxsPSIjZjdmNGVjIi8+PHBhdGggZD0iTTY1IDgwaDI2ME02NSAxMzBoMjIwTTY1IDE4MGgyNDVNNjUgMjMwaDE3MCIgc3Ryb2tlPSIjMzE1NTc1IiBzdHJva2Utd2lkdGg9IjExIiBvcGFjaXR5PSIuNTUiLz48L2c+CjxnIGZpbHRlcj0idXJsKCNzaGFkb3cxMikiPgogICAgICA8Y2lyY2xlIGN4PSIxMjYwIiBjeT0iNTIwIiByPSIxNzAiIGZpbGw9IiMwYjJiNGQiIHN0cm9rZT0idXJsKCNnb2xkMTIpIiBzdHJva2Utd2lkdGg9IjgiLz4KICAgICAgPGVsbGlwc2UgY3g9IjEyNjAiIGN5PSI1MjAiIHJ4PSI4MS42IiByeT0iMTcwIiBmaWxsPSJub25lIiBzdHJva2U9IiM3ZGI1ZTQiIHN0cm9rZS13aWR0aD0iMyIgb3BhY2l0eT0iLjciLz4KICAgICAgPGVsbGlwc2UgY3g9IjEyNjAiIGN5PSI1MjAiIHJ4PSIxMzIuNiIgcnk9IjE3MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjN2RiNWU0IiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9Ii40MiIvPgogICAgICA8cGF0aCBkPSJNMTA5MCA1MjBIMTQzMCBNMTExMy44IDQ0My41UTEyNjAgNDk0LjUgMTQwNi4yIDQ0My41IE0xMTEzLjggNTk2LjVRMTI2MCA1NDUuNSAxNDA2LjIgNTk2LjUiIHN0cm9rZT0iIzdkYjVlNCIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIiBvcGFjaXR5PSIuMzgiLz4KICAgICAgPHBhdGggZD0iTTExNjYuNSA1MDMuMCBRMTIxNy41IDQyNi41IDEyNjMuNCA0NzIuNCBRMTMzNi41IDUwMy4wIDEzNjUuNCA1NTAuNiBRMTMwMi41IDYxOC42IDEyMzQuNSA1NzQuNCBRMTE3NS4wIDU1MC42IDExNjYuNSA1MDMuMFoiIGZpbGw9IiM0YjgyYWQiIG9wYWNpdHk9Ii41OCIvPgogICAgPC9nPjxwYXRoIGQ9Ik02MjAgNDMwYzkwLTYwIDEzNS02NSAxODAtMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YTk2MiIgc3Ryb2tlLXdpZHRoPSIxMCIvPjxwYXRoIGQ9Ik03OTAgNDAwbDMwLTI4TTc5MCA0MDBsMzAgMzAiIHN0cm9rZT0iI2M5YTk2MiIgc3Ryb2tlLXdpZHRoPSI5Ii8+PHBhdGggZD0iTTExOTAgNjUwYy0xNDAgODAtMjcwIDc1LTQwMC0xMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNmViNGU3IiBzdHJva2Utd2lkdGg9IjgiIHN0cm9rZS1kYXNoYXJyYXk9IjE4IDE2Ii8+PC9nPgo8cGF0aCBkPSJNMCA4MzggUTQwMCA3NjAgODAwIDgyNiBUMTYwMCA4MDAgVjkwMEgwWiIgZmlsbD0iIzAzMDkxNCIgb3BhY2l0eT0iLjciLz4KPC9zdmc+" alt="حقوق بانکی و اعتبارات اسنادی در تجارت بین‌الملل">
+                            </div>
+                            <div class="news-card-content">
+                                <h3>حقوق بانکی و اعتبارات اسنادی در تجارت بین‌الملل</h3>
+                                <p class="news-card-excerpt">بررسی چارچوب‌های حقوقی بانکداری و اعتبارات اسنادی در معاملات بین‌المللی و عملیات بانکی فرامرزی...</p>
                             </div>
                         </article>
                     </div>
                 </section>
-            </main>
 
-            <!-- Sidebar -->
+</main>
+
+                <!-- Sidebar -->
             <aside class="sidebar">
                 <!-- Categories Widget -->
                 <div class="sidebar-widget reveal">
@@ -1358,6 +1453,31 @@
     </div>
 
     <script>
+        // Preloader: show logo for 2 seconds, then reveal the site
+        setTimeout(function() {
+            const preloader = document.getElementById('preloader');
+            preloader.classList.add('hide');
+            document.body.classList.remove('is-loading');
+            setTimeout(function() { preloader.remove(); }, 700);
+            reveal();
+        }, 2000);
+
+        // Image fallback: if a photo fails to load, try the backup link, then show a neutral gradient
+        document.addEventListener('error', function(e) {
+            const img = e.target;
+            if (!img || img.tagName !== 'IMG' || img.closest('#preloader') || img.closest('.logo')) return;
+            const backup = img.getAttribute('data-fallback');
+            if (backup && !img.dataset.triedFallback) {
+                img.dataset.triedFallback = '1';
+                img.src = backup;
+                return;
+            }
+            img.style.display = 'none';
+            if (img.parentElement) {
+                img.parentElement.style.background = 'linear-gradient(135deg, var(--primary-color), var(--accent-color))';
+            }
+        }, true);
+
         // Mobile Menu Toggle
         function toggleMenu() {
             const navMenu = document.getElementById('navMenu');
@@ -1484,11 +1604,18 @@
         document.addEventListener('DOMContentLoaded', function() {
             const images = document.querySelectorAll('img');
             images.forEach(img => {
+                img.style.transition = 'opacity 0.3s';
+                if (img.complete && img.naturalWidth > 0) {
+                    img.style.opacity = '1';
+                    return;
+                }
+                img.style.opacity = '0';
                 img.addEventListener('load', function() {
                     this.style.opacity = '1';
                 });
-                img.style.opacity = '0';
-                img.style.transition = 'opacity 0.3s';
+                img.addEventListener('error', function() {
+                    this.style.opacity = '1';
+                });
             });
         });
 
@@ -1611,6 +1738,7 @@
         // Console Welcome Message
         console.log('%c سررسید ', 'background: #1a2f4f; color: #c9a962; font-size: 24px; font-weight: bold; padding: 10px 20px;');
         console.log('%c مرجع تخصصی حقوق اقتصادی و تجارت بین‌الملل ', 'color: #1a2f4f; font-size: 14px;');
+        console.log('%c تصاویر مقالات به‌صورت داخلی و بدون وابستگی به سرویس خارجی تعبیه شده‌اند. ', 'color: #2c4a7c;');
     </script>
 </body>
 </html>
